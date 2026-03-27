@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 33% 94%;
+    --foreground: 0 0% 7%;
+    --card: 40 33% 94%;
+    --card-foreground: 0 0% 7%;
+    --popover: 40 33% 94%;
+    --popover-foreground: 0 0% 7%;
+    --primary: 42 60% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 20% 88%;
+    --secondary-foreground: 0 0% 7%;
+    --muted: 40 15% 90%;
+    --muted-foreground: 0 0% 43%;
+    --accent: 42 60% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 15% 85%;
+    --input: 40 15% 85%;
+    --ring: 42 60% 55%;
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-ivory text-charcoal antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+  }
+}
+
+@layer components {
+  .heading-xl {
+    font-size: clamp(44px, 6vw, 84px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  
+  .heading-lg {
+    font-size: clamp(34px, 4.2vw, 64px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+  }
+  
+  .heading-md {
+    font-size: clamp(22px, 2.4vw, 34px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  
+  .label-text {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+  
+  .body-text {
+    font-size: 16px;
+    line-height: 1.55;
+    max-width: 42ch;
+  }
+  
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-gold text-white font-medium rounded-full transition-all duration-500 ease-out;
+  }
+  
+  .btn-primary:hover {
+    @apply bg-gold-dark shadow-lg;
+    transform: translateY(-2px);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0) scale(0.98);
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-4 border border-charcoal/20 text-charcoal font-medium rounded-full transition-all duration-500 ease-out;
+  }
+  
+  .btn-secondary:hover {
+    @apply border-gold text-gold shadow-md bg-white;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(0) scale(0.98);
+  }
+  
+  .text-link {
+    @apply inline-flex items-center gap-2 text-charcoal font-medium transition-all duration-500 ease-out;
+  }
+  
+  .text-link:hover {
+    @apply text-gold;
+  }
+  
+  .divider {
+    @apply w-px;
+    background-color: rgba(17, 17, 17, 0.18);
+  }
+  
+  .grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.04;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+  
+  .section-pinned {
+    @apply relative w-screen h-screen overflow-hidden;
+  }
+  
+  .watermark {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(96px, 12vw, 180px);
+    font-weight: 600;
+    color: rgba(17, 17, 17, 0.06);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .watermark-light {
+    color: rgba(246, 242, 234, 0.12);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F6F2EA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4A24A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B88A3D;
+}
+
+/* Selection */
+::selection {
+  background: rgba(212, 162, 74, 0.3);
+  color: #111111;
+}
