@@ -21,7 +21,7 @@ const FloatingSocial = () => {
     >
       {/* Instagram */}
       <a
-        href="https://instagram.com/garvitaarora"
+        href="https://www.instagram.com/garvitaaroramakeup?utm_source=qr"
         target="_blank"
         rel="noopener noreferrer"
         className="group relative"

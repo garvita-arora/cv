@@ -133,7 +133,7 @@ const ContactSection = () => {
 
               {/* Instagram - Second Most Prominent */}
               <a
-                href="https://instagram.com/garvitaarora"
+                href="https://www.instagram.com/garvitaaroramakeup?utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-5 text-ivory hover:text-gold transition-colors group"
@@ -186,7 +186,7 @@ const ContactSection = () => {
             {/* Social Links Row */}
             <div className="flex items-center gap-4 mt-12 pt-8 border-t border-ivory/10">
               <a
-                href="https://instagram.com/garvitaarora"
+                href="https://www.instagram.com/garvitaaroramakeup?utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 rounded-full text-white hover:shadow-lg hover:scale-105 transition-all"

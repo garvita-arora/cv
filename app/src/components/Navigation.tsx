@@ -61,7 +61,7 @@ const Navigation = () => {
 
             {/* Instagram - Right */}
             <a
-              href="https://instagram.com/garvitaarora"
+              href="https://www.instagram.com/garvitaaroramakeup?utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-white text-sm font-medium hover:text-ivory transition-colors"
@@ -114,7 +114,7 @@ const Navigation = () => {
           <div className="hidden lg:flex items-center gap-3">
             {/* Instagram Icon */}
             <a
-              href="https://instagram.com/garvitaarora"
+              href="https://www.instagram.com/garvitaaroramakeup?utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full border border-charcoal/20 flex items-center justify-center text-charcoal hover:text-gold hover:border-gold transition-all"
@@ -204,7 +204,7 @@ const Navigation = () => {
               <span className="text-lg font-medium">+91 98765 43210</span>
             </a>
             <a
-              href="https://instagram.com/garvitaarora"
+              href="https://www.instagram.com/garvitaaroramakeup?utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 text-charcoal hover:text-gold transition-colors"
