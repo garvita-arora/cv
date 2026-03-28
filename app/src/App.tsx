@@ -163,22 +163,20 @@ function App() {
           zIndex={40}
         />
 
-        {/* Section 5: Products */}
+        {/* Section 5: Services */}
         <SplitSection
-          id="products"
-          images={getSectionImages('products')}
-          imageAlt="Products that perform"
-          headline={['Products', 'that', 'perform.']}
-          body="Curated formulas tested on real skin tones—long wear, clean finish, easy to blend."
-          cta="Shop the kit"
+          id="services"
+          images={getSectionImages('services')}
+          imageAlt="Services tailored for you"
+          headline={['Services', 'tailored', 'for you.']}
+          body="From bridal trials to editorial sessions—every service is personalised to bring out your best look."
+          cta="Book a service"
           ctaAction={() => {
-            const message = `Hi! I'd love to shop from the Garvita Arora curated makeup kit. What products do you currently have available?`;
+            const message = `Hi Garvita! I'd love to learn more about your services and book a session.`;
             window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
           }}
-          watermark="GLOW"
+          watermark="SERVE"
           zIndex={50}
-          hasProductCard
-          productCardSrc="/product_card.jpg"
         />
 
         {/* Section 6: Studio */}
