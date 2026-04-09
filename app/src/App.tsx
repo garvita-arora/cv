@@ -111,7 +111,7 @@ function App() {
       {/* Main Content */}
       <main className="relative">
         {/* Section 1: Hero */}
-        <HeroSection images={getSectionImages('hero')} />
+        <HeroSection images={getSectionImages('hero').length > 0 ? getSectionImages('hero') : getSectionImages('portfolio')} />
 
         {/* Section 2: Signature Look */}
         <SplitSection
