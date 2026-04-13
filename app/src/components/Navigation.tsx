@@ -42,7 +42,7 @@ const Navigation = () => {
         <div className="bg-gold py-2 px-6 lg:px-12">
           <div className="flex items-center justify-between max-w-7xl mx-auto">
             <a
-              href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20have%20a%20general%20inquiry."
+              href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20came%20across%20your%20website%20and%20I%20have%20a%20general%20inquiry.%20Could%20you%20please%20assist%20me%3F"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-white text-sm font-medium hover:text-ivory transition-colors"
@@ -124,7 +124,7 @@ const Navigation = () => {
             </a>
 
             <a
-              href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20have%20a%20general%20inquiry."
+              href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20came%20across%20your%20website%20and%20I%20have%20a%20general%20inquiry.%20Could%20you%20please%20assist%20me%3F"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full border border-charcoal/20 flex items-center justify-center text-charcoal hover:text-gold hover:border-gold transition-all"
@@ -135,8 +135,8 @@ const Navigation = () => {
 
             <button
               onClick={() => {
-                const message = `Hi Garvita! I would like to book a makeup session.`;
-                window.open(`https://wa.me/919548144908?text=${message}`, '_blank');
+                const message = `Hi Garvita! 💄 I just visited your website and I'd like to book a makeup session. Could you share your available dates, services, and packages?`;
+                window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
               }}
               className="btn-primary text-sm py-3 px-6 ml-2"
             >
@@ -182,8 +182,8 @@ const Navigation = () => {
           ))}
           <button
             onClick={() => {
-              const message = `Hi Garvita! I would like to book a makeup session.`;
-              window.open(`https://wa.me/919548144908?text=${message}`, '_blank');
+              const message = `Hi Garvita! 💄 I just visited your website and I'd like to book a makeup session. Could you share your available dates, services, and packages?`;
+              window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
             }}
             className="btn-primary mt-6"
           >
@@ -193,7 +193,7 @@ const Navigation = () => {
           {/* Mobile Contact Info */}
           <div className="flex flex-col items-center gap-4 mt-8 pt-8 border-t border-charcoal/10">
             <a
-              href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20have%20a%20general%20inquiry."
+              href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20came%20across%20your%20website%20and%20I%20have%20a%20general%20inquiry.%20Could%20you%20please%20assist%20me%3F"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 text-charcoal hover:text-gold transition-colors"

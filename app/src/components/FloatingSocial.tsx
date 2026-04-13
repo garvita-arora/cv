@@ -53,7 +53,7 @@ const FloatingSocial = () => {
 
       {/* WhatsApp */}
       <a
-        href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20visited%20your%20website%20and%20have%20a%20general%20inquiry."
+        href="https://wa.me/919548144908?text=Hi%20Garvita!%20%F0%9F%91%8B%20I%20just%20visited%20your%20website%20and%20I%20love%20your%20work!%20I%20have%20an%20inquiry%20and%20would%20love%20to%20chat.%20Could%20you%20help%20me%3F"
         target="_blank"
         rel="noopener noreferrer"
         className="group relative"

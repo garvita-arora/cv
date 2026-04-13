@@ -124,7 +124,7 @@ function App() {
           ctaAction={() => scrollToSection('#bridal')}
           secondaryCta="Other makeup packages"
           secondaryAction={() => {
-            const message = `Hi Garvita! I'd love to know more about your other makeup packages and services.`;
+            const message = `Hi Garvita! 👋 I just saw your Signature Look portfolio and I'm interested in knowing more about your other makeup packages. Could you share the details and pricing?`;
             window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           watermark="GLAM"
@@ -140,8 +140,8 @@ function App() {
           body="We prep, layer, and set with products that treat your skin gently—so the glow lasts without the weight."
           cta="Read the routine"
           ctaAction={() => {
-            const message = `Hi Garvita! I'm interested in learning more about your skincare and makeup prep routine.`;
-            window.open(`https://wa.me/919548144908?text=${message}`, '_blank');
+            const message = `Hi Garvita! 🌿 I came across your Makeup as Self-Care section and I'd love to know more about your skincare prep routine and the products you use. Could you guide me?`;
+            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           watermark="GLOW"
           zIndex={30}
@@ -156,13 +156,13 @@ function App() {
           body="From beginner essentials to advanced editorial—small batches, live demos, and feedback that actually improves your hand."
           cta="View courses"
           ctaAction={() => {
-            const message = `Hi Garvita! I'm interested in enrolling in your Makeup Academy courses. Could you share the details and pricing?`;
-            window.open(`https://wa.me/919548144908?text=${message}`, '_blank');
+            const message = `Hi Garvita! 🎨 I'm interested in joining your Makeup Academy. Could you please share the available courses, batch dates, duration, and fee structure?`;
+            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           secondaryCta="Download brochure"
           secondaryAction={() => {
-            const message = `Hi Garvita! Could you please share the Makeup Academy brochure with me?`;
-            window.open(`https://wa.me/919548144908?text=${message}`, '_blank');
+            const message = `Hi Garvita! 📄 I'd like to learn more about your Makeup Academy. Could you please send me the course brochure with all details?`;
+            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           watermark="LEARN"
           zIndex={40}
@@ -177,8 +177,8 @@ function App() {
           body="From bridal trials to editorial sessions—every service is personalised to bring out your best look."
           cta="Book a service"
           ctaAction={() => {
-            const message = `Hi Garvita! I'd love to learn more about your services and book a session.`;
-            window.open(`https://wa.me/919548144908?text=${message}`, '_blank');
+            const message = `Hi Garvita! 💄 I just browsed through your Services section and I'd like to book a makeup session. Could you share your available dates, services, and pricing?`;
+            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           watermark="SERVE"
           zIndex={50}
@@ -192,7 +192,10 @@ function App() {
           headline={['A space', 'built for', 'calm.']}
           body="Natural light, clean stations, and a workflow designed to keep your day effortless."
           cta="Book a studio visit"
-          ctaAction={() => scrollToSection('#contact')}
+          ctaAction={() => {
+            const message = `Hi Garvita! 🏠 I saw your Studio section and I'd love to visit. Could you share the studio address and your available slots for a visit?`;
+            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
+          }}
           watermark="STUDIO"
           zIndex={60}
         />
@@ -205,7 +208,10 @@ function App() {
           headline={['Bridal', 'expertise.']}
           body="We've done 2200+ bride's in the past 8 years. Trials that answer your questions. Wedding-day timing that respects the schedule. Makeup that photographs true to life."
           cta="Book a session"
-          ctaAction={() => scrollToSection('#contact')}
+          ctaAction={() => {
+            const message = `Hi Garvita! 👰 I'm interested in booking a bridal makeup session with you. Could you share your bridal packages, availability, and whether you have trial sessions?`;
+            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
+          }}
           watermark="BRIDE"
           zIndex={70}
         />
