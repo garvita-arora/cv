@@ -268,6 +268,11 @@ const ContactSection = () => {
                   >
                     <option value="">Select a service</option>
                     <option value="bridal">Bridal Makeup</option>
+                    <option value="groom">Groom Makeup</option>
+                    <option value="pre-bridal">Pre-Bridal Makeup</option>
+                    <option value="cocktail">Cocktail Makeup</option>
+                    <option value="mehndi">Mehndi Makeup</option>
+                    <option value="roka">Roka Makeup</option>
                     <option value="editorial">Editorial Makeup</option>
                     <option value="academy">Academy Course</option>
                     <option value="other">Other</option>
