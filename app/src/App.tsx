@@ -122,6 +122,11 @@ function App() {
           body="A clean base, sculpted features, and a lip that stays put from vows to reception."
           cta="See bridal packages"
           ctaAction={() => scrollToSection('#bridal')}
+          secondaryCta="Other makeup packages"
+          secondaryAction={() => {
+            const message = `Hi Garvita! I'd love to know more about your other makeup packages and services.`;
+            window.open(`https://wa.me/919876543210?text=${encodeURIComponent(message)}`, '_blank');
+          }}
           watermark="GLAM"
           zIndex={20}
         />
@@ -198,8 +203,8 @@ function App() {
           images={getSectionImages('bridal')}
           imageAlt="Bridal expertise"
           headline={['Bridal', 'expertise.']}
-          body="Trials that answer your questions. Wedding-day timing that respects the schedule. Makeup that photographs true to life."
-          cta="Start with a trial"
+          body="We've done 2200+ bride's in the past 8 years. Trials that answer your questions. Wedding-day timing that respects the schedule. Makeup that photographs true to life."
+          cta="Book a session"
           ctaAction={() => scrollToSection('#contact')}
           watermark="BRIDE"
           zIndex={70}
