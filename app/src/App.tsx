@@ -124,7 +124,16 @@ function App() {
           ctaAction={() => scrollToSection('#bridal')}
           secondaryCta="Other makeup packages"
           secondaryAction={() => {
-            const message = `Hi Garvita! 👋 I just saw your Signature Look portfolio and I'm interested in knowing more about your other makeup packages. Could you share the details and pricing?`;
+            const message =
+              `Hi Garvita! 👋\n\n` +
+              `I just browsed through your Signature Look portfolio and I'm really impressed! 💖\n\n` +
+              `I'm interested in exploring your other makeup packages. Could you help me with:\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n` +
+              `💄 What makeup packages do you offer?\n` +
+              `💰 What is the pricing for each?\n` +
+              `📅 What is your current availability?\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n\n` +
+              `Thank you! Looking forward to your reply. 🌟`;
             window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           watermark="GLAM"
@@ -140,7 +149,16 @@ function App() {
           body="We prep, layer, and set with products that treat your skin gently—so the glow lasts without the weight."
           cta="Read the routine"
           ctaAction={() => {
-            const message = `Hi Garvita! 🌿 I came across your Makeup as Self-Care section and I'd love to know more about your skincare prep routine and the products you use. Could you guide me?`;
+            const message =
+              `Hi Garvita! 👋\n\n` +
+              `I just read about your Makeup as Self-Care philosophy on your website and I absolutely love this approach! 🌿\n\n` +
+              `I'd love to know more about your routine. Could you share:\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n` +
+              `🧖 Your step-by-step skincare prep routine?\n` +
+              `🧴 Products you swear by for a gentle glow?\n` +
+              `📌 Tips for making makeup feel lighter on skin?\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n\n` +
+              `Thank you so much! ✨`;
             window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           watermark="GLOW"
@@ -156,12 +174,33 @@ function App() {
           body="From beginner essentials to advanced editorial—small batches, live demos, and feedback that actually improves your hand."
           cta="View courses"
           ctaAction={() => {
-            const message = `Hi Garvita! 🎨 I'm interested in joining your Makeup Academy. Could you please share the available courses, batch dates, duration, and fee structure?`;
+            const message =
+              `Hi Garvita! 👋\n\n` +
+              `I just came across your Makeup Academy section and I'm very excited about it! 🎨\n\n` +
+              `I'd love to enroll. Could you please share:\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n` +
+              `🎓 What courses are available? (Beginner / Advanced / Editorial)\n` +
+              `📅 Upcoming batch dates & class duration?\n` +
+              `💰 Fee structure & what's covered in each course?\n` +
+              `📍 In-person at your studio or available online?\n` +
+              `👥 Batch size / number of students?\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n\n` +
+              `Really looking forward to learning from you! 🌟`;
             window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           secondaryCta="Download brochure"
           secondaryAction={() => {
-            const message = `Hi Garvita! 📄 I'd like to learn more about your Makeup Academy. Could you please send me the course brochure with all details?`;
+            const message =
+              `Hi Garvita! 👋\n\n` +
+              `I just visited your Makeup Academy section on your website and I'm very interested! 📚\n\n` +
+              `Could you please send me the full course brochure? I'd love to review:\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n` +
+              `📄 Course list & syllabus\n` +
+              `💰 Fees & payment options\n` +
+              `📅 Batch schedule & timings\n` +
+              `🏆 Certifications included?\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n\n` +
+              `Thank you! ✨`;
             window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           watermark="LEARN"
@@ -177,7 +216,20 @@ function App() {
           body="From bridal trials to editorial sessions—every service is personalised to bring out your best look."
           cta="Book a service"
           ctaAction={() => {
-            const message = `Hi Garvita! 💄 I just browsed through your Services section and I'd like to book a makeup session. Could you share your available dates, services, and pricing?`;
+            const message =
+              `Hi Garvita! 👋\n\n` +
+              `I just browsed your Services section on your website and I'm really interested! 💄\n\n` +
+              `I'd like to book a session. Here's what I'm looking for:\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n` +
+              `📌 Service needed: [Bridal / Party / Editorial / Other]\n` +
+              `📅 Event / session date: [Please mention]\n` +
+              `📍 Location: [Studio / Home / Venue]\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n\n` +
+              `Could you please share:\n` +
+              `✅ Available service packages & pricing\n` +
+              `✅ Your availability for my date\n` +
+              `✅ Whether you travel to the venue\n\n` +
+              `Thank you! 🌟`;
             window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           watermark="SERVE"
@@ -193,7 +245,17 @@ function App() {
           body="Natural light, clean stations, and a workflow designed to keep your day effortless."
           cta="Book a studio visit"
           ctaAction={() => {
-            const message = `Hi Garvita! 🏠 I saw your Studio section and I'd love to visit. Could you share the studio address and your available slots for a visit?`;
+            const message =
+              `Hi Garvita! 👋\n\n` +
+              `I just saw your Studio section on your website — it looks absolutely stunning! 🏠✨\n\n` +
+              `I'd love to visit the studio. Could you help me with:\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n` +
+              `📍 Studio address & directions?\n` +
+              `📅 Available visit / session slots?\n` +
+              `⏰ What are your studio working hours?\n` +
+              `💰 Do you offer a trial session at the studio?\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n\n` +
+              `Really excited to visit! Thank you! 😊`;
             window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           watermark="STUDIO"
@@ -209,7 +271,21 @@ function App() {
           body="We've done 2200+ bride's in the past 8 years. Trials that answer your questions. Wedding-day timing that respects the schedule. Makeup that photographs true to life."
           cta="Book a session"
           ctaAction={() => {
-            const message = `Hi Garvita! 👰 I'm interested in booking a bridal makeup session with you. Could you share your bridal packages, availability, and whether you have trial sessions?`;
+            const message =
+              `Hi Garvita! 👋\n\n` +
+              `I just read about your Bridal Expertise on your website — 2200+ brides in 8 years is incredible! 👰✨\n\n` +
+              `I'm interested in booking a bridal makeup session. Here are my details:\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n` +
+              `💍 Wedding date: [Please fill]\n` +
+              `📅 Trial session needed: [Yes / No]\n` +
+              `💏 No. of people (bride + family): [Please fill]\n` +
+              `📍 Venue / location: [Studio / Home / Venue]\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n\n` +
+              `Could you please share:\n` +
+              `✅ Bridal packages & pricing\n` +
+              `✅ Availability for my wedding date\n` +
+              `✅ Whether you offer on-site bridal services\n\n` +
+              `Looking forward to getting bridal-ready with you! 💖`;
             window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           watermark="BRIDE"

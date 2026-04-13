@@ -53,7 +53,16 @@ const FloatingSocial = () => {
 
       {/* WhatsApp */}
       <a
-        href="https://wa.me/919548144908?text=Hi%20Garvita!%20%F0%9F%91%8B%20I%20just%20visited%20your%20website%20and%20I%20love%20your%20work!%20I%20have%20an%20inquiry%20and%20would%20love%20to%20chat.%20Could%20you%20help%20me%3F"
+        href={`https://wa.me/919548144908?text=${encodeURIComponent(
+          `Hi Garvita! 👋\n\n` +
+          `I just visited your website and I love your work! 💄✨\n\n` +
+          `I have an inquiry and would love to chat. Could you please help me with:\n` +
+          `━━━━━━━━━━━━━━━━━━━━\n` +
+          `📌 I'm interested in: [Bridal / Academy / Services / General]\n` +
+          `📅 My preferred date / timeframe: [Please fill]\n` +
+          `━━━━━━━━━━━━━━━━━━━━\n\n` +
+          `Looking forward to hearing from you! 🌟`
+        )}`}
         target="_blank"
         rel="noopener noreferrer"
         className="group relative"

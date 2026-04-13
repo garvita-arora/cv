@@ -135,7 +135,16 @@ const Navigation = () => {
 
             <button
               onClick={() => {
-                const message = `Hi Garvita! 💄 I just visited your website and I'd like to book a makeup session. Could you share your available dates, services, and packages?`;
+                const message =
+                  `Hi Garvita! 👋\n\n` +
+                  `I just visited your website and I'd love to book a makeup session! 💄\n\n` +
+                  `Here's what I'm looking for:\n` +
+                  `━━━━━━━━━━━━━━━━━━━━\n` +
+                  `📌 Service: [Bridal / Party / Editorial / Other]\n` +
+                  `📅 Preferred date: [Please mention]\n` +
+                  `📍 Location: [Studio / Home / Venue]\n` +
+                  `━━━━━━━━━━━━━━━━━━━━\n\n` +
+                  `Could you please share your packages and availability? Thank you! 🌟`;
                 window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
               }}
               className="btn-primary text-sm py-3 px-6 ml-2"
@@ -182,7 +191,16 @@ const Navigation = () => {
           ))}
           <button
             onClick={() => {
-              const message = `Hi Garvita! 💄 I just visited your website and I'd like to book a makeup session. Could you share your available dates, services, and packages?`;
+              const message =
+                `Hi Garvita! 👋\n\n` +
+                `I just visited your website and I'd love to book a makeup session! 💄\n\n` +
+                `Here's what I'm looking for:\n` +
+                `━━━━━━━━━━━━━━━━━━━━\n` +
+                `📌 Service: [Bridal / Party / Editorial / Other]\n` +
+                `📅 Preferred date: [Please mention]\n` +
+                `📍 Location: [Studio / Home / Venue]\n` +
+                `━━━━━━━━━━━━━━━━━━━━\n\n` +
+                `Could you please share your packages and availability? Thank you! 🌟`;
               window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
             }}
             className="btn-primary mt-6"
