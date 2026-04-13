@@ -125,7 +125,7 @@ function App() {
           secondaryCta="Other makeup packages"
           secondaryAction={() => {
             const message = `Hi Garvita! I'd love to know more about your other makeup packages and services.`;
-            window.open(`https://wa.me/919876543210?text=${encodeURIComponent(message)}`, '_blank');
+            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
           }}
           watermark="GLAM"
           zIndex={20}
@@ -141,7 +141,7 @@ function App() {
           cta="Read the routine"
           ctaAction={() => {
             const message = `Hi Garvita! I'm interested in learning more about your skincare and makeup prep routine.`;
-            window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+            window.open(`https://wa.me/919548144908?text=${message}`, '_blank');
           }}
           watermark="GLOW"
           zIndex={30}
@@ -157,12 +157,12 @@ function App() {
           cta="View courses"
           ctaAction={() => {
             const message = `Hi Garvita! I'm interested in enrolling in your Makeup Academy courses. Could you share the details and pricing?`;
-            window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+            window.open(`https://wa.me/919548144908?text=${message}`, '_blank');
           }}
           secondaryCta="Download brochure"
           secondaryAction={() => {
             const message = `Hi Garvita! Could you please share the Makeup Academy brochure with me?`;
-            window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+            window.open(`https://wa.me/919548144908?text=${message}`, '_blank');
           }}
           watermark="LEARN"
           zIndex={40}
@@ -178,7 +178,7 @@ function App() {
           cta="Book a service"
           ctaAction={() => {
             const message = `Hi Garvita! I'd love to learn more about your services and book a session.`;
-            window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+            window.open(`https://wa.me/919548144908?text=${message}`, '_blank');
           }}
           watermark="SERVE"
           zIndex={50}

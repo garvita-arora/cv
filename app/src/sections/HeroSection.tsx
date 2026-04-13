@@ -101,12 +101,12 @@ const HeroSection = ({ images = [] }: { images: string[] }) => {
 
   const handleBookSession = () => {
     const message = `Hi Garvita! I would like to book a makeup session. Could you share your availability and packages?`;
-    window.open(`https://wa.me/919876543210?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const handleAcademyInquiry = () => {
     const message = `Hi Garvita! I'm interested in exploring your makeup academy courses.`;
-    window.open(`https://wa.me/919876543210?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   return (

@@ -38,7 +38,7 @@ const FloatingSocial = () => {
 
       {/* Phone */}
       <a
-        href="tel:+919876543210"
+        href="tel:+919548144908"
         className="group relative"
         aria-label="Call Now"
       >
@@ -47,13 +47,13 @@ const FloatingSocial = () => {
         </div>
         {/* Tooltip */}
         <span className="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-charcoal text-white text-xs px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-          +91 98765 43210
+          +91 95481 44908
         </span>
       </a>
 
       {/* WhatsApp */}
       <a
-        href="https://wa.me/919876543210?text=Hi%20Garvita!%20I%20visited%20your%20website%20and%20have%20a%20general%20inquiry."
+        href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20visited%20your%20website%20and%20have%20a%20general%20inquiry."
         target="_blank"
         rel="noopener noreferrer"
         className="group relative"

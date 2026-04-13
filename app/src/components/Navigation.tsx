@@ -42,7 +42,7 @@ const Navigation = () => {
         <div className="bg-gold py-2 px-6 lg:px-12">
           <div className="flex items-center justify-between max-w-7xl mx-auto">
             <a
-              href="https://wa.me/919876543210?text=Hi%20Garvita!%20I%20have%20a%20general%20inquiry."
+              href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20have%20a%20general%20inquiry."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-white text-sm font-medium hover:text-ivory transition-colors"
@@ -50,7 +50,7 @@ const Navigation = () => {
               <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center">
                 <Phone className="w-3.5 h-3.5" />
               </div>
-              <span className="hidden sm:inline">+91 98765 43210</span>
+              <span className="hidden sm:inline">+91 95481 44908</span>
               <span className="sm:hidden">Call Now</span>
             </a>
 
@@ -124,7 +124,7 @@ const Navigation = () => {
             </a>
 
             <a
-              href="https://wa.me/919876543210?text=Hi%20Garvita!%20I%20have%20a%20general%20inquiry."
+              href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20have%20a%20general%20inquiry."
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full border border-charcoal/20 flex items-center justify-center text-charcoal hover:text-gold hover:border-gold transition-all"
@@ -136,7 +136,7 @@ const Navigation = () => {
             <button
               onClick={() => {
                 const message = `Hi Garvita! I would like to book a makeup session.`;
-                window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+                window.open(`https://wa.me/919548144908?text=${message}`, '_blank');
               }}
               className="btn-primary text-sm py-3 px-6 ml-2"
             >
@@ -183,7 +183,7 @@ const Navigation = () => {
           <button
             onClick={() => {
               const message = `Hi Garvita! I would like to book a makeup session.`;
-              window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+              window.open(`https://wa.me/919548144908?text=${message}`, '_blank');
             }}
             className="btn-primary mt-6"
           >
@@ -193,7 +193,7 @@ const Navigation = () => {
           {/* Mobile Contact Info */}
           <div className="flex flex-col items-center gap-4 mt-8 pt-8 border-t border-charcoal/10">
             <a
-              href="https://wa.me/919876543210?text=Hi%20Garvita!%20I%20have%20a%20general%20inquiry."
+              href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20have%20a%20general%20inquiry."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 text-charcoal hover:text-gold transition-colors"
@@ -201,7 +201,7 @@ const Navigation = () => {
               <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center">
                 <Phone className="w-5 h-5 text-gold" />
               </div>
-              <span className="text-lg font-medium">+91 98765 43210</span>
+              <span className="text-lg font-medium">+91 95481 44908</span>
             </a>
             <a
               href="https://www.instagram.com/garvitaaroramakeup?utm_source=qr"

@@ -79,7 +79,7 @@ const ContactSection = () => {
     return () => ctx.revert();
   }, []);
 
-  const phoneNumber = '919876543210';
+  const phoneNumber = '919548144908';
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -119,7 +119,7 @@ const ContactSection = () => {
             <div className="space-y-6">
               {/* Phone - Most Prominent */}
               <a
-                href="tel:+919876543210"
+                href="tel:+919548144908"
                 className="flex items-center gap-5 text-ivory hover:text-gold transition-colors group"
               >
                 <div className="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center group-hover:bg-gold/30 transition-colors">
@@ -127,7 +127,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="text-text-muted-dark text-xs uppercase tracking-wider mb-1">Call Us</p>
-                  <span className="text-2xl font-serif">+91 98765 43210</span>
+                  <span className="text-2xl font-serif">+91 95481 44908</span>
                 </div>
               </a>
 
@@ -149,7 +149,7 @@ const ContactSection = () => {
 
               {/* WhatsApp */}
               <a
-                href="https://wa.me/919876543210?text=Hello! I visited your website and would like to know more about your services."
+                href="https://wa.me/919548144908?text=Hello! I visited your website and would like to know more about your services."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-5 text-ivory hover:text-gold transition-colors group"
@@ -159,7 +159,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="text-text-muted-dark text-xs uppercase tracking-wider mb-1">WhatsApp</p>
-                  <span className="text-2xl font-serif">+91 98765 43210</span>
+                  <span className="text-2xl font-serif">+91 95481 44908</span>
                 </div>
               </a>
 
@@ -250,7 +250,7 @@ const ContactSection = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-transparent border-b-2 border-charcoal/20 focus:border-gold outline-none transition-colors text-charcoal"
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 95481 44908"
                   />
                 </div>
 

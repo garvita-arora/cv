@@ -15,7 +15,7 @@ const WhatsAppChat = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const phoneNumber = '919876543210'; // Replace with actual number
+  const phoneNumber = '919548144908'; // Replace with actual number
   
   const quickReplies = [
     { icon: Calendar, label: 'Book Appointment', message: 'Hi! I would like to book a makeup appointment. Please share your availability.' },
