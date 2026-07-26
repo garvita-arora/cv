@@ -2,6 +2,7 @@ import { useRef, useLayoutEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, Phone, MapPin, Instagram, MessageCircle } from 'lucide-react';
+import { smoothScrollTo } from '../lib/scroll';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -120,7 +121,7 @@ const ContactSection = () => {
   };
 
   const scrollToForm = () => {
-    formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    smoothScrollTo('#enquiry-form', 'center center');
   };
 
   return (
@@ -236,6 +237,7 @@ const ContactSection = () => {
           {/* Right Form Card */}
           <div
             ref={formCardRef}
+            id="enquiry-form"
             className="flex-1 max-w-xl"
           >
             <form

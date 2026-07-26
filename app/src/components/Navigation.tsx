@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Instagram, ChevronDown } from 'lucide-react';
+import { smoothScrollTo } from '../lib/scroll';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,10 +29,7 @@ const Navigation = () => {
   ];
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    smoothScrollTo(href);
     setIsMobileMenuOpen(false);
   };
 

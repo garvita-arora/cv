@@ -44,7 +44,7 @@ const FullBleedSection = ({
           start: 'top top',
           end: '+=70%',
           pin: true,
-          scrub: 0.5,
+          scrub: 1,
         }
       });
 

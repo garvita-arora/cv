@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { Toaster } from 'sonner';
 
 import Navigation from './components/Navigation';
@@ -8,10 +9,12 @@ import FloatingSocial from './components/FloatingSocial';
 import HeroSection from './sections/HeroSection';
 import SplitSection from './sections/SplitSection';
 import FullBleedSection from './sections/FullBleedSection';
+import TestimonialsSection from './sections/TestimonialsSection';
 import StorySection from './sections/StorySection';
 import ContactSection from './sections/ContactSection';
+import { smoothScrollTo } from './lib/scroll';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 // Load all images statically via Vite at build time
 const allImagesGlob = import.meta.glob('/public/images/**/*.{jpg,jpeg,png,webp}', { eager: true });
@@ -26,6 +29,22 @@ const openWhatsApp = (message: string) => {
 };
 
 function App() {
+  // Smooth (lerped) scrolling for the whole page
+  useEffect(() => {
+    const smoother = ScrollSmoother.create({
+      wrapper: '#smooth-wrapper',
+      content: '#smooth-content',
+      smooth: 1.2,
+      smoothTouch: 0.1,
+      effects: false,
+    });
+    ScrollTrigger.refresh();
+
+    return () => {
+      smoother.kill();
+    };
+  }, []);
+
   // Global scroll snap for pinned sections
   useEffect(() => {
     // Wait for all ScrollTriggers to be created
@@ -67,9 +86,9 @@ function App() {
 
             return target;
           },
-          duration: { min: 0.15, max: 0.35 },
-          delay: 0,
-          ease: 'power2.out',
+          duration: { min: 0.4, max: 0.8 },
+          delay: 0.1,
+          ease: 'power2.inOut',
         },
       });
     }, 100);
@@ -87,10 +106,7 @@ function App() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.querySelector(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    smoothScrollTo(id);
   };
 
   // MAKEUP full-bleed absorbs part of the old BEAUTY slide (some pictures, not all)
@@ -125,8 +141,10 @@ function App() {
       {/* Navigation */}
       <Navigation />
 
-      {/* Main Content */}
-      <main className="relative">
+      {/* Main Content (wrapped for ScrollSmoother) */}
+      <div id="smooth-wrapper">
+        <div id="smooth-content">
+          <main className="relative">
         {/* Section 1: Hero */}
         <HeroSection images={getSectionImages('hero').length > 0 ? getSectionImages('hero') : getSectionImages('portfolio')} />
 
@@ -321,30 +339,17 @@ function App() {
           zIndex={100}
         />
 
-        {/* Section 11: Testimonials */}
-        <SplitSection
-          id="testimonials"
-          images={getSectionImages('services')}
-          imageAlt="Client testimonials"
-          headline={['Kind', 'words.']}
-          body="Real stories from our brides, students, and clients—party makeup, pre-bridal care, courses and more—are on their way. This space will soon be filled with their experiences."
-          cta="Share your experience"
-          ctaAction={() => {
-            const message =
-              `Hi Garvita! 👋\n\n` +
-              `I'd love to share my experience / feedback about your services. 💖`;
-            openWhatsApp(message);
-          }}
-          watermark="LOVE"
-          zIndex={110}
-        />
+        {/* Section 11: Testimonials (Flowing) */}
+        <TestimonialsSection />
 
         {/* Section 12: Know the Story (Flowing) */}
         <StorySection image={getSectionImages('artist')[0]} />
 
         {/* Section 13: Contact (Flowing) */}
         <ContactSection />
-      </main>
+          </main>
+        </div>
+      </div>
 
       {/* Floating Social Buttons */}
       <FloatingSocial />

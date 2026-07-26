@@ -46,7 +46,7 @@ const HeroSection = ({ images = [] }: { images: string[] }) => {
           start: 'top top',
           end: '+=70%',
           pin: true,
-          scrub: 0.5,
+          scrub: 1,
           onLeaveBack: () => {
             // Reset all elements when scrolling back to top
             gsap.set([image, headline, subhead, cta, scrollHint, divider], {
