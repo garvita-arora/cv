@@ -16,6 +16,9 @@ import { smoothScrollTo } from './lib/scroll';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
+// Prevent jarring ScrollTrigger refreshes when the mobile address bar shows/hides
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 // Load all images statically via Vite at build time
 const allImagesGlob = import.meta.glob('/public/images/**/*.{jpg,jpeg,png,webp}', { eager: true });
 const getSectionImages = (section: string) => {

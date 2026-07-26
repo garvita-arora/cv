@@ -137,9 +137,9 @@ const FullBleedSection = ({
       {/* Center Headline */}
       <h2
         ref={headlineRef}
-        className="absolute left-1/2 top-[52%] -translate-x-1/2 -translate-y-1/2 font-serif text-ivory text-center"
+        className="absolute left-1/2 top-[52%] -translate-x-1/2 -translate-y-1/2 font-serif text-ivory text-center w-full px-4"
         style={{
-          fontSize: 'clamp(72px, 10vw, 160px)',
+          fontSize: 'clamp(44px, 10vw, 160px)',
           textShadow: '0 4px 30px rgba(0,0,0,0.3)',
           lineHeight: 1,
           letterSpacing: '-0.02em',
@@ -151,7 +151,7 @@ const FullBleedSection = ({
       {/* Bottom-left Microcopy */}
       <p
         ref={microcopyRef}
-        className="absolute left-[6vw] bottom-[10vh] max-w-[38ch] text-ivory/90 text-base leading-relaxed"
+        className="absolute left-[6vw] right-[6vw] bottom-[8vh] lg:right-auto max-w-[38ch] text-ivory/90 text-sm lg:text-base leading-relaxed"
       >
         {microcopy}
       </p>

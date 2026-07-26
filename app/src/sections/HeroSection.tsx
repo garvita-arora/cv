@@ -137,24 +137,24 @@ const HeroSection = ({ images = [] }: { images: string[] }) => {
       ref={sectionRef}
       className="section-pinned bg-ivory z-10"
     >
-      {/* Left Portrait Image */}
+      {/* Portrait Image: top strip on mobile, left column on desktop */}
       <div
         ref={imageRef}
-        className="absolute left-0 top-0 w-[56vw] h-full"
+        className="absolute left-0 top-0 w-full h-[38vh] lg:w-[56vw] lg:h-full overflow-hidden"
       >
         <RotatingImage images={images} alt="Garvita Arora Makeup" />
       </div>
 
-      {/* Vertical Divider */}
+      {/* Vertical Divider (desktop only) */}
       <div
         ref={dividerRef}
-        className="absolute left-[56vw] top-[10vh] h-[80vh] w-px bg-charcoal/18 origin-top"
+        className="hidden lg:block absolute left-[56vw] top-[10vh] h-[80vh] w-px bg-charcoal/18 origin-top"
       />
 
-      {/* Right Text Block */}
-      <div className="absolute left-[62vw] top-[18vh] w-[34vw]">
+      {/* Text Block: below image on mobile, right column on desktop */}
+      <div className="absolute left-0 right-0 top-[42vh] px-6 lg:left-[62vw] lg:right-auto lg:top-[18vh] lg:px-0 lg:w-[34vw]">
         {/* Headline */}
-        <div ref={headlineRef} className="mb-8">
+        <div ref={headlineRef} className="mb-4 lg:mb-8">
           <h1 className="heading-xl font-serif text-charcoal">
             <span className="block">Makeup that</span>
             <span className="block">feels like</span>
@@ -165,7 +165,7 @@ const HeroSection = ({ images = [] }: { images: string[] }) => {
         {/* Subheadline */}
         <p
           ref={subheadRef}
-          className="body-text text-text-secondary mb-10"
+          className="body-text text-text-secondary text-sm lg:text-base mb-6 lg:mb-10"
         >
           Bridal, editorial, and everyday looks—crafted to match your mood, not mask it.
         </p>
@@ -183,10 +183,10 @@ const HeroSection = ({ images = [] }: { images: string[] }) => {
         </div>
       </div>
 
-      {/* Scroll Hint */}
+      {/* Scroll Hint (desktop only) */}
       <div
         ref={scrollHintRef}
-        className="absolute right-[4vw] bottom-[6vh] flex flex-col items-center gap-2"
+        className="hidden lg:flex absolute right-[4vw] bottom-[6vh] flex-col items-center gap-2"
       >
         <span className="label-text text-charcoal/60">Scroll</span>
         <ChevronDown className="w-5 h-5 text-charcoal/40 animate-bounce" />

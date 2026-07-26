@@ -138,7 +138,10 @@
   }
   
   .section-pinned {
-    @apply relative w-screen h-screen overflow-hidden;
+    @apply relative w-screen overflow-hidden;
+    /* svh keeps a stable height on mobile while the address bar shows/hides */
+    height: 100vh;
+    height: 100svh;
   }
   
   .watermark {

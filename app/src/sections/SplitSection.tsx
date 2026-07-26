@@ -184,11 +184,11 @@ const SplitSection = ({
   };
 
   const renderList = (list: string[]) => (
-    <ul className="space-y-3 mb-10">
+    <ul className="space-y-2 lg:space-y-3 mb-6 lg:mb-10">
       {list.map((item) => (
         <li key={item} className="flex items-center gap-3">
           <span className="w-1.5 h-1.5 rounded-full bg-gold shrink-0" />
-          <span className="text-charcoal/85 text-base leading-relaxed">{item}</span>
+          <span className="text-charcoal/85 text-sm lg:text-base leading-relaxed">{item}</span>
         </li>
       ))}
     </ul>
@@ -201,25 +201,25 @@ const SplitSection = ({
       className="section-pinned bg-ivory"
       style={{ zIndex }}
     >
-      {/* Left Portrait Image */}
+      {/* Portrait Image: top strip on mobile, left column on desktop */}
       <div
         ref={imageRef}
-        className="absolute left-0 top-0 w-[56vw] h-full overflow-hidden"
+        className="absolute left-0 top-0 w-full h-[38vh] lg:w-[56vw] lg:h-full overflow-hidden"
       >
         <RotatingImage images={images} alt={imageAlt} />
       </div>
 
-      {/* Vertical Divider */}
+      {/* Vertical Divider (desktop only) */}
       <div
         ref={dividerRef}
-        className="absolute left-[56vw] top-[10vh] h-[80vh] w-px bg-charcoal/18 origin-top"
+        className="hidden lg:block absolute left-[56vw] top-[10vh] h-[80vh] w-px bg-charcoal/18 origin-top"
       />
 
-      {/* Right Text Block */}
-      <div className="absolute left-[62vw] top-[18vh] w-[34vw]">
+      {/* Text Block: below image on mobile, right column on desktop */}
+      <div className="absolute left-0 right-0 top-[42vh] px-6 lg:left-[62vw] lg:right-auto lg:top-[18vh] lg:px-0 lg:w-[34vw]">
         <div ref={textBlockRef}>
           {/* Headline */}
-          <div className="mb-8">
+          <div className="mb-4 lg:mb-8">
             <h2 className="heading-lg font-serif text-charcoal">
               {headline.map((line, index) => (
                 <span
@@ -240,7 +240,7 @@ const SplitSection = ({
           ) : (
             <>
               {body && (
-                <p className={`body-text text-text-secondary ${items ? 'mb-6' : 'mb-10'}`}>
+                <p className={`body-text text-text-secondary text-sm lg:text-base ${items ? 'mb-4 lg:mb-6' : 'mb-6 lg:mb-10'}`}>
                   {body}
                 </p>
               )}
@@ -266,18 +266,18 @@ const SplitSection = ({
 
           {/* Feedback column (e.g. bride's feedback) */}
           {feedbackTitle && (
-            <div className="mt-8 pt-6 border-t border-charcoal/10 max-w-[40ch]">
+            <div className="mt-5 lg:mt-8 pt-4 lg:pt-6 border-t border-charcoal/10 max-w-[40ch]">
               <p className="label-text text-gold mb-2">{feedbackTitle}</p>
-              <p className="text-text-secondary text-sm leading-relaxed">{feedbackNote}</p>
+              <p className="text-text-secondary text-xs lg:text-sm leading-relaxed">{feedbackNote}</p>
             </div>
           )}
         </div>
       </div>
 
-      {/* Watermark */}
+      {/* Watermark (desktop only) */}
       <div
         ref={watermarkRef}
-        className="absolute left-[58vw] top-[62vh] watermark select-none pointer-events-none"
+        className="hidden lg:block absolute left-[58vw] top-[62vh] watermark select-none pointer-events-none"
       >
         {watermark}
       </div>
