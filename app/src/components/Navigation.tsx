@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Instagram, ChevronDown } from 'lucide-react';
 import { smoothScrollTo, smoothScrollToTop } from '../lib/scroll';
-import { openWhatsApp, WA_MESSAGES } from '../lib/whatsapp';
+import { openEnquiry } from '../lib/whatsapp';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -156,7 +156,7 @@ const Navigation = () => {
             </a>
 
             <button
-              onClick={() => openWhatsApp(WA_MESSAGES.booking)}
+              onClick={() => openEnquiry('booking')}
               className="btn-primary text-sm py-3 px-6 ml-2"
             >
               Book
@@ -211,7 +211,10 @@ const Navigation = () => {
             </button>
           ))}
           <button
-            onClick={() => openWhatsApp(WA_MESSAGES.booking)}
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              openEnquiry('booking');
+            }}
             className="btn-primary mt-6"
           >
             Book a Session

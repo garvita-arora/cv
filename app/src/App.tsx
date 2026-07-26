@@ -13,7 +13,8 @@ import TestimonialsSection from './sections/TestimonialsSection';
 import StorySection from './sections/StorySection';
 import ContactSection from './sections/ContactSection';
 import { smoothScrollTo } from './lib/scroll';
-import { openWhatsApp, WA_MESSAGES } from './lib/whatsapp';
+import { openEnquiry } from './lib/whatsapp';
+import EnquiryModal from './components/EnquiryModal';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -176,7 +177,7 @@ function App() {
           headline={['Pre-Bridal', 'as', 'self-care.']}
           body="Skin and hair treatments, medi-facials and bridal facials, waxing, body polishing, manicure–pedicure, hair spa, and nails—every ritual designed to have you glowing long before the big day."
           cta="Book consultation"
-          ctaAction={() => openWhatsApp(WA_MESSAGES.preBridal)}
+          ctaAction={() => openEnquiry('preBridal')}
           watermark="GLOW"
           zIndex={30}
         />
@@ -196,7 +197,7 @@ function App() {
             'Hydra Facial course',
           ]}
           revealCta="Join now"
-          revealCtaAction={() => openWhatsApp(WA_MESSAGES.academyJoin)}
+          revealCtaAction={() => openEnquiry('academyJoin')}
           secondaryCta="Student testimonials"
           secondaryAction={() => scrollToSection('#testimonials')}
           watermark="LEARN"
@@ -211,7 +212,7 @@ function App() {
           headline={['A space', 'built for', 'calm.']}
           body="Natural light, clean stations, and a workflow designed to keep your day effortless."
           cta="Book a studio visit"
-          ctaAction={() => openWhatsApp(WA_MESSAGES.studio)}
+          ctaAction={() => openEnquiry('studio')}
           watermark="STUDIO"
           zIndex={50}
         />
@@ -224,7 +225,7 @@ function App() {
           headline={['Bridal', 'expertise.']}
           body="We've done 2200+ brides in the past 8 years. Wedding-day timing that respects the schedule. Makeup that photographs true to life."
           cta="Book a session"
-          ctaAction={() => openWhatsApp(WA_MESSAGES.bridal)}
+          ctaAction={() => openEnquiry('bridal')}
           feedbackTitle="Bride's Feedback"
           feedbackNote="Real stories from our brides are on their way — watch this space."
           watermark="BRIDE"
@@ -244,7 +245,7 @@ function App() {
             'Cocktail / Sangeet makeup',
           ]}
           cta="Book a session"
-          ctaAction={() => openWhatsApp(WA_MESSAGES.packages)}
+          ctaAction={() => openEnquiry('packages')}
           watermark="STYLE"
           zIndex={70}
         />
@@ -293,6 +294,9 @@ function App() {
 
       {/* Floating Social Buttons */}
       <FloatingSocial />
+
+      {/* Guided enquiry dialog (fixed — must stay outside the smooth wrapper) */}
+      <EnquiryModal />
     </div>
   );
 }

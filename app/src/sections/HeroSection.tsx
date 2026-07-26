@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 
 import RotatingImage from '../components/RotatingImage';
-import { openWhatsApp, WA_MESSAGES } from '../lib/whatsapp';
+import { openWhatsApp, openEnquiry, WA_MESSAGES } from '../lib/whatsapp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -105,7 +105,7 @@ const HeroSection = ({ images = [] }: { images: string[] }) => {
     };
   }, []);
 
-  const handleBookSession = () => openWhatsApp(WA_MESSAGES.booking);
+  const handleBookSession = () => openEnquiry('booking');
   const handleAcademyInquiry = () => openWhatsApp(WA_MESSAGES.academyInfo);
 
   return (
