@@ -83,7 +83,7 @@ const Navigation = () => {
         className={`fixed left-0 right-0 z-40 transition-all duration-500 ${
           isScrolled
             ? 'top-0 bg-ivory/95 backdrop-blur-md shadow-subtle py-4'
-            : 'top-10 bg-transparent py-4'
+            : 'top-10 bg-ivory/80 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none py-4'
         }`}
       >
         <div className="w-full px-6 lg:px-12 flex items-center justify-between">

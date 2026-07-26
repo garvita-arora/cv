@@ -14,8 +14,8 @@ const FloatingSocial = () => {
   }, []);
 
   return (
-    <div 
-      className={`fixed bottom-6 left-6 z-50 flex flex-col gap-3 transition-all duration-500 ${
+    <div
+      className={`fixed bottom-4 left-4 lg:bottom-6 lg:left-6 z-50 flex flex-row lg:flex-col gap-3 transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
     >
@@ -27,7 +27,7 @@ const FloatingSocial = () => {
         className="group relative"
         aria-label="Follow on Instagram"
       >
-        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+        <div className="w-11 h-11 lg:w-12 lg:h-12 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
           <Instagram className="w-5 h-5 text-white" />
         </div>
         {/* Tooltip */}
@@ -42,7 +42,7 @@ const FloatingSocial = () => {
         className="group relative"
         aria-label="Call Now"
       >
-        <div className="w-12 h-12 rounded-full bg-gold flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+        <div className="w-11 h-11 lg:w-12 lg:h-12 rounded-full bg-gold flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
           <Phone className="w-5 h-5 text-white" />
         </div>
         {/* Tooltip */}
@@ -68,7 +68,7 @@ const FloatingSocial = () => {
         className="group relative"
         aria-label="Chat on WhatsApp"
       >
-        <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
+        <div className="w-11 h-11 lg:w-12 lg:h-12 rounded-full bg-green-500 flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
           <MessageCircle className="w-5 h-5 text-white" />
         </div>
         {/* Tooltip */}

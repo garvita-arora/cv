@@ -27,19 +27,22 @@ const HeroSection = ({ images = [] }: { images: string[] }) => {
 
     if (!section || !image || !headline || !subhead || !cta || !scrollHint || !divider) return;
 
-    const ctx = gsap.context(() => {
-      // Initial load animation
-      const loadTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+    const mm = gsap.matchMedia();
 
-      loadTl
-        .fromTo(image, { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 1.1 })
-        .fromTo(divider, { scaleY: 0 }, { scaleY: 1, duration: 0.8 }, 0.3)
-        .fromTo(headline.children, { y: 40, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08, duration: 0.7 }, 0.4)
-        .fromTo(subhead, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.7)
-        .fromTo(cta, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.9)
-        .fromTo(scrollHint, { opacity: 0 }, { opacity: 1, duration: 0.4 }, 1.1);
+    // Initial load animation (all screen sizes)
+    const loadTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
-      // Scroll-driven exit animation
+    loadTl
+      .fromTo(image, { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 1.1 })
+      .fromTo(divider, { scaleY: 0 }, { scaleY: 1, duration: 0.8 }, 0.3)
+      .fromTo(headline.children, { y: 40, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08, duration: 0.7 }, 0.4)
+      .fromTo(subhead, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.7)
+      .fromTo(cta, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.9)
+      .fromTo(scrollHint, { opacity: 0 }, { opacity: 1, duration: 0.4 }, 1.1);
+
+    // Scroll-driven pinned exit animation (desktop only — on mobile the hero
+    // scrolls away naturally with everything visible)
+    mm.add('(min-width: 1024px)', () => {
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -88,15 +91,17 @@ const HeroSection = ({ images = [] }: { images: string[] }) => {
         // CTA now stays visible (no exit animation)
 
         // Scroll hint fades early
-        .fromTo(scrollHint, 
-          { opacity: 1 }, 
-          { opacity: 0 }, 
+        .fromTo(scrollHint,
+          { opacity: 1 },
+          { opacity: 0 },
           0.65
         );
+    });
 
-    }, section);
-
-    return () => ctx.revert();
+    return () => {
+      loadTl.kill();
+      mm.revert();
+    };
   }, []);
 
   const handleBookSession = () => {

@@ -32,20 +32,26 @@ const openWhatsApp = (message: string) => {
 };
 
 function App() {
-  // Smooth (lerped) scrolling for the whole page
+  // Smooth (lerped) scrolling — desktop pointers only. Phones/tablets keep
+  // fully native scrolling, which is smoother and more reliable on touch.
   useEffect(() => {
-    const smoother = ScrollSmoother.create({
-      wrapper: '#smooth-wrapper',
-      content: '#smooth-content',
-      smooth: 1.2,
-      smoothTouch: 0.1,
-      effects: false,
-    });
-    ScrollTrigger.refresh();
+    const mm = gsap.matchMedia();
 
-    return () => {
-      smoother.kill();
-    };
+    mm.add('(hover: hover) and (pointer: fine)', () => {
+      const smoother = ScrollSmoother.create({
+        wrapper: '#smooth-wrapper',
+        content: '#smooth-content',
+        smooth: 1.2,
+        effects: false,
+      });
+      ScrollTrigger.refresh();
+
+      return () => {
+        smoother.kill();
+      };
+    });
+
+    return () => mm.revert();
   }, []);
 
   // Global scroll snap for pinned sections.

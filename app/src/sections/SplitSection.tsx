@@ -72,7 +72,31 @@ const SplitSection = ({
 
     if (!section || !image || !textBlock || !ctaBlock || !watermarkEl || !divider) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    // Mobile: no pinning — everything stays visible with a light fade-up entrance.
+    // The scrubbed opacity timelines below would leave photos/text invisible
+    // between pins, which reads as broken on touch scrolling.
+    mm.add('(max-width: 1023px)', () => {
+      gsap.fromTo([image, textBlock, ctaBlock],
+        { y: 24, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.12,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 75%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    });
+
+    // Desktop: pinned cinematic scrub timeline
+    mm.add('(min-width: 1024px)', () => {
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -162,10 +186,9 @@ const SplitSection = ({
           0.7
         );
       }
+    });
 
-    }, section);
-
-    return () => ctx.revert();
+    return () => mm.revert();
   }, [hasProductCard]);
 
   const isRevealMode = !!revealItems && revealItems.length > 0;

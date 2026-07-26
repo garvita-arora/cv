@@ -37,7 +37,42 @@ const FullBleedSection = ({
 
     if (!section || !bg || !headlineEl || !label || !microcopyEl) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    // Mobile: no pinning — content stays visible with a light fade entrance
+    mm.add('(max-width: 1023px)', () => {
+      gsap.fromTo(bg,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 75%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+      gsap.fromTo([headlineEl, label, microcopyEl],
+        { y: 24, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.12,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 70%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    });
+
+    // Desktop: pinned cinematic scrub timeline
+    mm.add('(min-width: 1024px)', () => {
       const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -103,10 +138,9 @@ const FullBleedSection = ({
           { opacity: 0, ease: 'power2.in' }, 
           0.7
         );
+    });
 
-    }, section);
-
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
