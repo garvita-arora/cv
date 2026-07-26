@@ -13,6 +13,7 @@ import TestimonialsSection from './sections/TestimonialsSection';
 import StorySection from './sections/StorySection';
 import ContactSection from './sections/ContactSection';
 import { smoothScrollTo } from './lib/scroll';
+import { openWhatsApp, WA_MESSAGES } from './lib/whatsapp';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -25,10 +26,6 @@ const getSectionImages = (section: string) => {
   return Object.keys(allImagesGlob)
     .filter(p => p.startsWith(`/public/images/${section}/`))
     .map(p => p.replace('/public', ''));
-};
-
-const openWhatsApp = (message: string) => {
-  window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
 };
 
 function App() {
@@ -179,19 +176,7 @@ function App() {
           headline={['Pre-Bridal', 'as', 'self-care.']}
           body="Skin and hair treatments, medi-facials and bridal facials, waxing, body polishing, manicure–pedicure, hair spa, and nails—every ritual designed to have you glowing long before the big day."
           cta="Book consultation"
-          ctaAction={() => {
-            const message =
-              `Hi Garvita! 👋\n\n` +
-              `I just read about your Pre-Bridal self-care services on your website and I'm really interested! 🌿\n\n` +
-              `I'd love to book a consultation. Could you help me with:\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n` +
-              `🧖 Details of the treatments? (skin & hair treatments, medi-facials, bridal facial, waxing, body polishing, mani-pedi, hair spa, nails)\n` +
-              `💰 Package options & pricing?\n` +
-              `📅 Your availability for a consultation?\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n\n` +
-              `Thank you so much! ✨`;
-            openWhatsApp(message);
-          }}
+          ctaAction={() => openWhatsApp(WA_MESSAGES.preBridal)}
           watermark="GLOW"
           zIndex={30}
         />
@@ -211,21 +196,7 @@ function App() {
             'Hydra Facial course',
           ]}
           revealCta="Join now"
-          revealCtaAction={() => {
-            const message =
-              `Hi Garvita! 👋\n\n` +
-              `I'd love to join a course at your academy! 🎓\n\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n` +
-              `📌 Course interested in: [Makeup (Self/Professional) / Hairstyling / Nail extension / Hydra Facial]\n` +
-              `📅 Preferred batch / timing: [Please fill]\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n\n` +
-              `Could you please share:\n` +
-              `✅ Fee structure & what's included\n` +
-              `✅ Upcoming batch dates & duration\n` +
-              `✅ In-person or online options\n\n` +
-              `Really looking forward to learning from you! 🌟`;
-            openWhatsApp(message);
-          }}
+          revealCtaAction={() => openWhatsApp(WA_MESSAGES.academyJoin)}
           secondaryCta="Student testimonials"
           secondaryAction={() => scrollToSection('#testimonials')}
           watermark="LEARN"
@@ -240,19 +211,7 @@ function App() {
           headline={['A space', 'built for', 'calm.']}
           body="Natural light, clean stations, and a workflow designed to keep your day effortless."
           cta="Book a studio visit"
-          ctaAction={() => {
-            const message =
-              `Hi Garvita! 👋\n\n` +
-              `I just saw your Studio section on your website — it looks absolutely stunning! 🏠✨\n\n` +
-              `I'd love to visit the studio. Could you help me with:\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n` +
-              `📍 Studio address & directions?\n` +
-              `📅 Available visit / session slots?\n` +
-              `⏰ What are your studio working hours?\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n\n` +
-              `Really excited to visit! Thank you! 😊`;
-            openWhatsApp(message);
-          }}
+          ctaAction={() => openWhatsApp(WA_MESSAGES.studio)}
           watermark="STUDIO"
           zIndex={50}
         />
@@ -265,23 +224,7 @@ function App() {
           headline={['Bridal', 'expertise.']}
           body="We've done 2200+ brides in the past 8 years. Wedding-day timing that respects the schedule. Makeup that photographs true to life."
           cta="Book a session"
-          ctaAction={() => {
-            const message =
-              `Hi Garvita! 👋\n\n` +
-              `I just read about your Bridal Expertise on your website — 2200+ brides in 8 years is incredible! 👰✨\n\n` +
-              `I'm interested in booking a bridal makeup session. Here are my details:\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n` +
-              `💍 Wedding date: [Please fill]\n` +
-              `💏 No. of people (bride + family): [Please fill]\n` +
-              `📍 Venue / location: [Studio / Venue]\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n\n` +
-              `Could you please share:\n` +
-              `✅ Bridal packages & pricing\n` +
-              `✅ Availability for my wedding date\n` +
-              `✅ Whether you offer on-site bridal services\n\n` +
-              `Looking forward to getting bridal-ready with you! 💖`;
-            openWhatsApp(message);
-          }}
+          ctaAction={() => openWhatsApp(WA_MESSAGES.bridal)}
           feedbackTitle="Bride's Feedback"
           feedbackNote="Real stories from our brides are on their way — watch this space."
           watermark="BRIDE"
@@ -301,18 +244,7 @@ function App() {
             'Cocktail / Sangeet makeup',
           ]}
           cta="Book a session"
-          ctaAction={() => {
-            const message =
-              `Hi Garvita! 👋\n\n` +
-              `I just browsed your makeup packages on your website and I'm really interested! 💄\n\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n` +
-              `📌 Package: [Party / Engagement–Reception / Roka–Haldi–Mehendi / Cocktail–Sangeet]\n` +
-              `📅 Event date: [Please fill]\n` +
-              `📍 Location: [Studio / Venue]\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n\n` +
-              `Could you please share the pricing & your availability? Thank you! 🌟`;
-            openWhatsApp(message);
-          }}
+          ctaAction={() => openWhatsApp(WA_MESSAGES.packages)}
           watermark="STYLE"
           zIndex={70}
         />

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Instagram, ChevronDown } from 'lucide-react';
 import { smoothScrollTo, smoothScrollToTop } from '../lib/scroll';
+import { openWhatsApp, WA_MESSAGES } from '../lib/whatsapp';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -155,19 +156,7 @@ const Navigation = () => {
             </a>
 
             <button
-              onClick={() => {
-                const message =
-                  `Hi Garvita! 👋\n\n` +
-                  `I just visited your website and I'd love to book a makeup session! 💄\n\n` +
-                  `Here's what I'm looking for:\n` +
-                  `━━━━━━━━━━━━━━━━━━━━\n` +
-                  `📌 Service: [Bridal / Party / Pre-Bridal / Other]\n` +
-                  `📅 Preferred date: [Please mention]\n` +
-                  `📍 Location: [Studio / Venue]\n` +
-                  `━━━━━━━━━━━━━━━━━━━━\n\n` +
-                  `Could you please share your packages and availability? Thank you! 🌟`;
-                window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
-              }}
+              onClick={() => openWhatsApp(WA_MESSAGES.booking)}
               className="btn-primary text-sm py-3 px-6 ml-2"
             >
               Book
@@ -222,19 +211,7 @@ const Navigation = () => {
             </button>
           ))}
           <button
-            onClick={() => {
-              const message =
-                `Hi Garvita! 👋\n\n` +
-                `I just visited your website and I'd love to book a makeup session! 💄\n\n` +
-                `Here's what I'm looking for:\n` +
-                `━━━━━━━━━━━━━━━━━━━━\n` +
-                `📌 Service: [Bridal / Party / Pre-Bridal / Other]\n` +
-                `📅 Preferred date: [Please mention]\n` +
-                `📍 Location: [Studio / Venue]\n` +
-                `━━━━━━━━━━━━━━━━━━━━\n\n` +
-                `Could you please share your packages and availability? Thank you! 🌟`;
-              window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
-            }}
+            onClick={() => openWhatsApp(WA_MESSAGES.booking)}
             className="btn-primary mt-6"
           >
             Book a Session

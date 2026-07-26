@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, Phone, MapPin, Instagram, MessageCircle } from 'lucide-react';
 import { smoothScrollTo } from '../lib/scroll';
+import { openWhatsApp, waLink, WA_MESSAGES } from '../lib/whatsapp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,8 +83,6 @@ const ContactSection = () => {
     return () => ctx.revert();
   }, []);
 
-  const phoneNumber = '919548144908';
-
   const serviceOptions = [
     'Bridal Makeup',
     'Groom Makeup',
@@ -99,17 +98,17 @@ const ContactSection = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const lines = [
-      `Hi Garvita! I'd like to enquire about your services. 💄`,
+      `Hi Garvita! I'd like to enquire about your services.`,
       ``,
-      `Name: ${formData.name}`,
-      `Email: ${formData.email}`,
-      `Phone: ${formData.phone}`,
-      `Service: ${formData.service}`,
-      `Preferred Date & Time: ${formData.datetime}`,
-      `No. of Events / Members: ${formData.members}`,
-      `Location Preference: ${formData.location}`,
+      `*Name:* ${formData.name}`,
+      `*Email:* ${formData.email}`,
+      `*Phone:* ${formData.phone}`,
+      `*Service:* ${formData.service}`,
+      `*Preferred Date & Time:* ${formData.datetime}`,
+      `*No. of Events / Members:* ${formData.members}`,
+      `*Location Preference:* ${formData.location}`,
     ];
-    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+    openWhatsApp(lines.join('\n'));
     setFormData({ name: '', email: '', phone: '', service: '', datetime: '', members: '', location: '' });
   };
 
@@ -186,7 +185,7 @@ const ContactSection = () => {
 
               {/* WhatsApp */}
               <a
-                href="https://wa.me/919548144908?text=Hello! I visited your website and would like to know more about your services."
+                href={waLink(WA_MESSAGES.general)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-5 text-ivory hover:text-gold transition-colors group"

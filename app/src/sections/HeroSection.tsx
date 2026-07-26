@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 
 import RotatingImage from '../components/RotatingImage';
+import { openWhatsApp, WA_MESSAGES } from '../lib/whatsapp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -104,38 +105,8 @@ const HeroSection = ({ images = [] }: { images: string[] }) => {
     };
   }, []);
 
-  const handleBookSession = () => {
-    const message =
-      `Hi Garvita! 👋\n\n` +
-      `I just visited your website and I absolutely love your work! 💄\n\n` +
-      `I'd love to book a makeup session with you. Here are a few details:\n` +
-      `━━━━━━━━━━━━━━━━━━━━\n` +
-      `📌 Service interested in: [Bridal / Party / Editorial / Other]\n` +
-      `📅 Preferred date: [Please mention]\n` +
-      `📍 Location preference: [Studio / On-site]\n` +
-      `━━━━━━━━━━━━━━━━━━━━\n\n` +
-      `Could you please share:\n` +
-      `✅ Your available packages & pricing\n` +
-      `✅ Your availability for my preferred date\n` +
-      `✅ Any prep required beforehand\n\n` +
-      `Looking forward to hearing from you! 🌟`;
-    window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
-  };
-
-  const handleAcademyInquiry = () => {
-    const message =
-      `Hi Garvita! 👋\n\n` +
-      `I just explored your website and I'm really excited about your Makeup Academy! 🎨\n\n` +
-      `I'd love to know more about the courses. Could you please share:\n` +
-      `━━━━━━━━━━━━━━━━━━━━\n` +
-      `🎓 What levels are available? (Beginner / Advanced / Editorial)\n` +
-      `📅 Upcoming batch dates & duration?\n` +
-      `💰 Fee structure & what's included?\n` +
-      `📍 Is it in-person or online?\n` +
-      `━━━━━━━━━━━━━━━━━━━━\n\n` +
-      `I'm genuinely keen on learning from you. Thank you! ✨`;
-    window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
-  };
+  const handleBookSession = () => openWhatsApp(WA_MESSAGES.booking);
+  const handleAcademyInquiry = () => openWhatsApp(WA_MESSAGES.academyInfo);
 
   return (
     <section

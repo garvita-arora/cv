@@ -2,6 +2,7 @@ import { useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Quote, MessageCircle } from 'lucide-react';
+import { openWhatsApp, WA_MESSAGES } from '../lib/whatsapp';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,12 +48,7 @@ const TestimonialsSection = () => {
     return () => ctx.revert();
   }, []);
 
-  const handleShareExperience = () => {
-    const message =
-      `Hi Garvita! 👋\n\n` +
-      `I'd love to share my experience / feedback about your services. 💖`;
-    window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
-  };
+  const handleShareExperience = () => openWhatsApp(WA_MESSAGES.feedback);
 
   return (
     <section

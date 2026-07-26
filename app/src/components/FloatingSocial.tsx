@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Instagram, Phone, MessageCircle } from 'lucide-react';
+import { waLink, WA_MESSAGES } from '../lib/whatsapp';
 
 const FloatingSocial = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -53,16 +54,7 @@ const FloatingSocial = () => {
 
       {/* WhatsApp */}
       <a
-        href={`https://wa.me/919548144908?text=${encodeURIComponent(
-          `Hi Garvita! 👋\n\n` +
-          `I just visited your website and I love your work! 💄✨\n\n` +
-          `I have an inquiry and would love to chat. Could you please help me with:\n` +
-          `━━━━━━━━━━━━━━━━━━━━\n` +
-          `📌 I'm interested in: [Bridal / Academy / Services / General]\n` +
-          `📅 My preferred date / timeframe: [Please fill]\n` +
-          `━━━━━━━━━━━━━━━━━━━━\n\n` +
-          `Looking forward to hearing from you! 🌟`
-        )}`}
+        href={waLink(WA_MESSAGES.general)}
         target="_blank"
         rel="noopener noreferrer"
         className="group relative"
