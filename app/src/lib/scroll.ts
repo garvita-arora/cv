@@ -13,3 +13,12 @@ export const smoothScrollTo = (selector: string, position: string = 'top top') =
     element.scrollIntoView({ behavior: 'smooth' });
   }
 };
+
+export const smoothScrollToTop = () => {
+  const smoother = ScrollSmoother.get();
+  if (smoother) {
+    smoother.scrollTo(0, true);
+  } else {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+};

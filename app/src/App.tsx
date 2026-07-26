@@ -48,29 +48,28 @@ function App() {
     };
   }, []);
 
-  // Global scroll snap for pinned sections
+  // Global scroll snap for pinned sections.
+  // Ranges are recomputed on every snap evaluation so they stay correct even
+  // when the page height changes after load (e.g. expanding the story section).
   useEffect(() => {
     // Wait for all ScrollTriggers to be created
     const timer = setTimeout(() => {
-      const pinned = ScrollTrigger.getAll()
-        .filter(st => st.vars.pin)
-        .sort((a, b) => a.start - b.start);
-
-      const maxScroll = ScrollTrigger.maxScroll(window);
-
-      if (!maxScroll || pinned.length === 0) return;
-
-      // Build pinned ranges with centers
-      const pinnedRanges = pinned.map(st => ({
-        start: st.start / maxScroll,
-        end: (st.end ?? st.start) / maxScroll,
-        center: (st.start + ((st.end ?? st.start) - st.start) * 0.5) / maxScroll,
-      }));
-
-      // Create global snap
       ScrollTrigger.create({
         snap: {
           snapTo: (value: number) => {
+            const maxScroll = ScrollTrigger.maxScroll(window);
+            if (!maxScroll) return value;
+
+            const pinnedRanges = ScrollTrigger.getAll()
+              .filter(st => st.vars.pin)
+              .map(st => ({
+                start: st.start / maxScroll,
+                end: (st.end ?? st.start) / maxScroll,
+                center: (st.start + ((st.end ?? st.start) - st.start) * 0.5) / maxScroll,
+              }));
+
+            if (pinnedRanges.length === 0) return value;
+
             // Check if within any pinned range (with buffer)
             const inPinned = pinnedRanges.some(
               r => value >= r.start - 0.02 && value <= r.end + 0.02

@@ -64,6 +64,8 @@ const StorySection = ({ image }: { image?: string }) => {
                 <img
                   src={image}
                   alt="Garvita Arora"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center"
                 />
               </div>

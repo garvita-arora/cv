@@ -34,10 +34,9 @@
     @apply border-border;
   }
   
-  html {
-    scroll-behavior: smooth;
-  }
-  
+  /* NOTE: no `scroll-behavior: smooth` here — it fights GSAP ScrollSmoother
+     and the ScrollTrigger snap. Smoothing is handled entirely by GSAP. */
+
   body {
     @apply bg-ivory text-charcoal antialiased;
     font-family: 'Inter', system-ui, sans-serif;

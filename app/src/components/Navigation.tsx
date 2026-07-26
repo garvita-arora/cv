@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Instagram, ChevronDown } from 'lucide-react';
-import { smoothScrollTo } from '../lib/scroll';
+import { smoothScrollTo, smoothScrollToTop } from '../lib/scroll';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -93,7 +93,7 @@ const Navigation = () => {
             className="font-serif text-2xl lg:text-3xl font-semibold text-charcoal tracking-tight"
             onClick={(e) => {
               e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              smoothScrollToTop();
             }}
           >
             Garvita Arora
@@ -107,7 +107,7 @@ const Navigation = () => {
                 Work
                 <ChevronDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180" />
               </button>
-              <div className="absolute left-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+              <div className="absolute left-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300">
                 <div className="bg-ivory border border-charcoal/10 shadow-card rounded-xl py-2 min-w-[230px]">
                   {workOptions.map((option) => (
                     <button

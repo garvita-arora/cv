@@ -204,7 +204,7 @@ const SplitSection = ({
       {/* Portrait Image: top strip on mobile, left column on desktop */}
       <div
         ref={imageRef}
-        className="absolute left-0 top-0 w-full h-[38vh] lg:w-[56vw] lg:h-full overflow-hidden"
+        className="absolute left-0 top-0 w-full h-[38svh] lg:w-[56vw] lg:h-full overflow-hidden"
       >
         <RotatingImage images={images} alt={imageAlt} />
       </div>
@@ -216,7 +216,7 @@ const SplitSection = ({
       />
 
       {/* Text Block: below image on mobile, right column on desktop */}
-      <div className="absolute left-0 right-0 top-[42vh] px-6 lg:left-[62vw] lg:right-auto lg:top-[18vh] lg:px-0 lg:w-[34vw]">
+      <div className="absolute left-0 right-0 top-[42svh] px-6 lg:left-[62vw] lg:right-auto lg:top-[18vh] lg:px-0 lg:w-[34vw]">
         <div ref={textBlockRef}>
           {/* Headline */}
           <div className="mb-4 lg:mb-8">
