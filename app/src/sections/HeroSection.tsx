@@ -44,7 +44,7 @@ const HeroSection = ({ images = [] }: { images: string[] }) => {
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: '+=70%',
+          end: '+=40%',
           pin: true,
           scrub: 1,
           onLeaveBack: () => {
