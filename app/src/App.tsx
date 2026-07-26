@@ -8,6 +8,7 @@ import FloatingSocial from './components/FloatingSocial';
 import HeroSection from './sections/HeroSection';
 import SplitSection from './sections/SplitSection';
 import FullBleedSection from './sections/FullBleedSection';
+import StorySection from './sections/StorySection';
 import ContactSection from './sections/ContactSection';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -20,6 +21,10 @@ const getSectionImages = (section: string) => {
     .map(p => p.replace('/public', ''));
 };
 
+const openWhatsApp = (message: string) => {
+  window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
+};
+
 function App() {
   // Global scroll snap for pinned sections
   useEffect(() => {
@@ -28,9 +33,9 @@ function App() {
       const pinned = ScrollTrigger.getAll()
         .filter(st => st.vars.pin)
         .sort((a, b) => a.start - b.start);
-      
+
       const maxScroll = ScrollTrigger.maxScroll(window);
-      
+
       if (!maxScroll || pinned.length === 0) return;
 
       // Build pinned ranges with centers
@@ -48,7 +53,7 @@ function App() {
             const inPinned = pinnedRanges.some(
               r => value >= r.start - 0.02 && value <= r.end + 0.02
             );
-            
+
             if (!inPinned) return value; // Flowing section: free scroll
 
             // Find nearest pinned center
@@ -88,14 +93,26 @@ function App() {
     }
   };
 
+  // MAKEUP full-bleed absorbs part of the old BEAUTY slide (some pictures, not all)
+  const makeupImages = [
+    ...getSectionImages('makeup'),
+    ...getSectionImages('beauty').slice(0, 3),
+  ];
+
+  // Pre-bridal slide combines selfcare + pre-bridal imagery
+  const preBridalImages = [
+    ...getSectionImages('selfcare'),
+    ...getSectionImages('pre-bridal'),
+  ];
+
   return (
     <div className="relative">
       {/* Grain Overlay */}
       <div className="grain-overlay" />
 
       {/* Toast notifications */}
-      <Toaster 
-        position="top-center" 
+      <Toaster
+        position="top-center"
         toastOptions={{
           style: {
             background: '#F6F2EA',
@@ -123,43 +140,31 @@ function App() {
           cta="See bridal packages"
           ctaAction={() => scrollToSection('#bridal')}
           secondaryCta="Other makeup packages"
-          secondaryAction={() => {
-            const message =
-              `Hi Garvita! 👋\n\n` +
-              `I just browsed through your Signature Look portfolio and I'm really impressed! 💖\n\n` +
-              `I'm interested in exploring your other makeup packages. Could you help me with:\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n` +
-              `💄 What makeup packages do you offer?\n` +
-              `💰 What is the pricing for each?\n` +
-              `📅 What is your current availability?\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n\n` +
-              `Thank you! Looking forward to your reply. 🌟`;
-            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
-          }}
+          secondaryAction={() => scrollToSection('#packages')}
           watermark="GLAM"
           zIndex={20}
         />
 
-        {/* Section 3: Self Care */}
+        {/* Section 3: Pre-Bridal as Self-Care */}
         <SplitSection
           id="selfcare"
-          images={getSectionImages('selfcare')}
-          imageAlt="Makeup as self-care"
-          headline={['Makeup', 'as', 'self-care.']}
-          body="We prep, layer, and set with products that treat your skin gently—so the glow lasts without the weight."
-          cta="Read the routine"
+          images={preBridalImages}
+          imageAlt="Pre-bridal self-care"
+          headline={['Pre-Bridal', 'as', 'self-care.']}
+          body="Skin and hair treatments, medi-facials and bridal facials, waxing, body polishing, manicure–pedicure, hair spa, and nails—every ritual designed to have you glowing long before the big day."
+          cta="Book consultation"
           ctaAction={() => {
             const message =
               `Hi Garvita! 👋\n\n` +
-              `I just read about your Makeup as Self-Care philosophy on your website and I absolutely love this approach! 🌿\n\n` +
-              `I'd love to know more about your routine. Could you share:\n` +
+              `I just read about your Pre-Bridal self-care services on your website and I'm really interested! 🌿\n\n` +
+              `I'd love to book a consultation. Could you help me with:\n` +
               `━━━━━━━━━━━━━━━━━━━━\n` +
-              `🧖 Your step-by-step skincare prep routine?\n` +
-              `🧴 Products you swear by for a gentle glow?\n` +
-              `📌 Tips for making makeup feel lighter on skin?\n` +
+              `🧖 Details of the treatments? (skin & hair treatments, medi-facials, bridal facial, waxing, body polishing, mani-pedi, hair spa, nails)\n` +
+              `💰 Package options & pricing?\n` +
+              `📅 Your availability for a consultation?\n` +
               `━━━━━━━━━━━━━━━━━━━━\n\n` +
               `Thank you so much! ✨`;
-            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
+            openWhatsApp(message);
           }}
           watermark="GLOW"
           zIndex={30}
@@ -171,72 +176,37 @@ function App() {
           images={getSectionImages('academy')}
           imageAlt="Learn the craft"
           headline={['Learn the', 'craft.']}
-          body="From beginner essentials to advanced editorial—small batches, live demos, and feedback that actually improves your hand."
+          body="From beginner essentials to advanced professional artistry—small batches, live demos, and feedback that actually improves your hand."
           cta="View courses"
-          ctaAction={() => {
+          revealItems={[
+            'Makeup courses (Self / Professional)',
+            'Hairstyling course',
+            'Nail extension course',
+            'Hydra Facial course',
+          ]}
+          revealCta="Join now"
+          revealCtaAction={() => {
             const message =
               `Hi Garvita! 👋\n\n` +
-              `I just came across your Makeup Academy section and I'm very excited about it! 🎨\n\n` +
-              `I'd love to enroll. Could you please share:\n` +
+              `I'd love to join a course at your academy! 🎓\n\n` +
               `━━━━━━━━━━━━━━━━━━━━\n` +
-              `🎓 What courses are available? (Beginner / Advanced / Editorial)\n` +
-              `📅 Upcoming batch dates & class duration?\n` +
-              `💰 Fee structure & what's covered in each course?\n` +
-              `📍 In-person at your studio or available online?\n` +
-              `👥 Batch size / number of students?\n` +
+              `📌 Course interested in: [Makeup (Self/Professional) / Hairstyling / Nail extension / Hydra Facial]\n` +
+              `📅 Preferred batch / timing: [Please fill]\n` +
               `━━━━━━━━━━━━━━━━━━━━\n\n` +
+              `Could you please share:\n` +
+              `✅ Fee structure & what's included\n` +
+              `✅ Upcoming batch dates & duration\n` +
+              `✅ In-person or online options\n\n` +
               `Really looking forward to learning from you! 🌟`;
-            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
+            openWhatsApp(message);
           }}
-          secondaryCta="Download brochure"
-          secondaryAction={() => {
-            const message =
-              `Hi Garvita! 👋\n\n` +
-              `I just visited your Makeup Academy section on your website and I'm very interested! 📚\n\n` +
-              `Could you please send me the full course brochure? I'd love to review:\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n` +
-              `📄 Course list & syllabus\n` +
-              `💰 Fees & payment options\n` +
-              `📅 Batch schedule & timings\n` +
-              `🏆 Certifications included?\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n\n` +
-              `Thank you! ✨`;
-            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
-          }}
+          secondaryCta="Student testimonials"
+          secondaryAction={() => scrollToSection('#testimonials')}
           watermark="LEARN"
           zIndex={40}
         />
 
-        {/* Section 5: Services */}
-        <SplitSection
-          id="services"
-          images={getSectionImages('services')}
-          imageAlt="Services tailored for you"
-          headline={['Services', 'tailored', 'for you.']}
-          body="From bridal trials to editorial sessions—every service is personalised to bring out your best look."
-          cta="Book a service"
-          ctaAction={() => {
-            const message =
-              `Hi Garvita! 👋\n\n` +
-              `I just browsed your Services section on your website and I'm really interested! 💄\n\n` +
-              `I'd like to book a session. Here's what I'm looking for:\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n` +
-              `📌 Service needed: [Bridal / Party / Editorial / Other]\n` +
-              `📅 Event / session date: [Please mention]\n` +
-              `📍 Location: [Studio / Home / Venue]\n` +
-              `━━━━━━━━━━━━━━━━━━━━\n\n` +
-              `Could you please share:\n` +
-              `✅ Available service packages & pricing\n` +
-              `✅ Your availability for my date\n` +
-              `✅ Whether you travel to the venue\n\n` +
-              `Thank you! 🌟`;
-            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
-          }}
-          watermark="SERVE"
-          zIndex={50}
-        />
-
-        {/* Section 6: Studio */}
+        {/* Section 5: Studio */}
         <SplitSection
           id="studio"
           images={getSectionImages('studio')}
@@ -253,22 +223,21 @@ function App() {
               `📍 Studio address & directions?\n` +
               `📅 Available visit / session slots?\n` +
               `⏰ What are your studio working hours?\n` +
-              `💰 Do you offer a trial session at the studio?\n` +
               `━━━━━━━━━━━━━━━━━━━━\n\n` +
               `Really excited to visit! Thank you! 😊`;
-            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
+            openWhatsApp(message);
           }}
           watermark="STUDIO"
-          zIndex={60}
+          zIndex={50}
         />
 
-        {/* Section 7: Bridal */}
+        {/* Section 6: Bridal */}
         <SplitSection
           id="bridal"
           images={getSectionImages('bridal')}
           imageAlt="Bridal expertise"
           headline={['Bridal', 'expertise.']}
-          body="We've done 2200+ bride's in the past 8 years. Trials that answer your questions. Wedding-day timing that respects the schedule. Makeup that photographs true to life."
+          body="We've done 2200+ brides in the past 8 years. Wedding-day timing that respects the schedule. Makeup that photographs true to life."
           cta="Book a session"
           ctaAction={() => {
             const message =
@@ -277,28 +246,58 @@ function App() {
               `I'm interested in booking a bridal makeup session. Here are my details:\n` +
               `━━━━━━━━━━━━━━━━━━━━\n` +
               `💍 Wedding date: [Please fill]\n` +
-              `📅 Trial session needed: [Yes / No]\n` +
               `💏 No. of people (bride + family): [Please fill]\n` +
-              `📍 Venue / location: [Studio / Home / Venue]\n` +
+              `📍 Venue / location: [Studio / Venue]\n` +
               `━━━━━━━━━━━━━━━━━━━━\n\n` +
               `Could you please share:\n` +
               `✅ Bridal packages & pricing\n` +
               `✅ Availability for my wedding date\n` +
               `✅ Whether you offer on-site bridal services\n\n` +
               `Looking forward to getting bridal-ready with you! 💖`;
-            window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
+            openWhatsApp(message);
           }}
+          feedbackTitle="Bride's Feedback"
+          feedbackNote="Real stories from our brides are on their way — watch this space."
           watermark="BRIDE"
+          zIndex={60}
+        />
+
+        {/* Section 7: Other Makeup Packages (integrated with bridal) */}
+        <SplitSection
+          id="packages"
+          images={getSectionImages('makeup')}
+          imageAlt="Makeup packages"
+          headline={['Other makeup', 'packages.']}
+          items={[
+            'Party makeup',
+            'Engagement / Reception makeup',
+            'Roka / Haldi / Mehendi makeup',
+            'Cocktail / Sangeet makeup',
+          ]}
+          cta="Book a session"
+          ctaAction={() => {
+            const message =
+              `Hi Garvita! 👋\n\n` +
+              `I just browsed your makeup packages on your website and I'm really interested! 💄\n\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n` +
+              `📌 Package: [Party / Engagement–Reception / Roka–Haldi–Mehendi / Cocktail–Sangeet]\n` +
+              `📅 Event date: [Please fill]\n` +
+              `📍 Location: [Studio / Venue]\n` +
+              `━━━━━━━━━━━━━━━━━━━━\n\n` +
+              `Could you please share the pricing & your availability? Thank you! 🌟`;
+            openWhatsApp(message);
+          }}
+          watermark="STYLE"
           zIndex={70}
         />
 
-        {/* Section 8: Makeup (Full-bleed) */}
+        {/* Section 8: Makeup (Full-bleed, absorbs the old Beauty slide) */}
         <FullBleedSection
           id="makeup"
-          images={getSectionImages('makeup')}
+          images={makeupImages}
           imageAlt="Makeup artistry"
           headline="MAKEUP"
-          microcopy="Precision, balance, and a finish that moves with you."
+          microcopy="Precision, balance, and a finish that moves with you. Not overdone, not underdone—exactly right for the moment."
           zIndex={80}
         />
 
@@ -308,31 +307,42 @@ function App() {
           images={getSectionImages('artist')}
           imageAlt="The artist"
           headline="ARTIST"
-          microcopy="Years of editorial, bridal, and backstage work—distilled into a method that's reliable and personal."
+          microcopy="Years of bridal, non-bridal, and skin & hair treatment expertise—distilled into a method that's reliable and personal."
           zIndex={90}
         />
 
-        {/* Section 10: Beauty (Full-bleed) */}
-        <FullBleedSection
-          id="beauty"
-          images={getSectionImages('beauty')}
-          imageAlt="Beauty"
-          headline="BEAUTY"
-          microcopy="Not overdone. Not underdone. Exactly right for the moment."
-          zIndex={100}
-        />
-
-        {/* Section 11: Signature (Full-bleed) */}
+        {/* Section 10: Signature (Full-bleed) */}
         <FullBleedSection
           id="signature"
           images={getSectionImages('signature')}
           imageAlt="Garvita Arora"
           headline="GARVITA ARORA"
-          microcopy="Book a session, join a course, or shop the kit—everything starts with a conversation."
+          microcopy="Book a session, join a course, or visit the studio—everything starts with a conversation."
+          zIndex={100}
+        />
+
+        {/* Section 11: Testimonials */}
+        <SplitSection
+          id="testimonials"
+          images={getSectionImages('services')}
+          imageAlt="Client testimonials"
+          headline={['Kind', 'words.']}
+          body="Real stories from our brides, students, and clients—party makeup, pre-bridal care, courses and more—are on their way. This space will soon be filled with their experiences."
+          cta="Share your experience"
+          ctaAction={() => {
+            const message =
+              `Hi Garvita! 👋\n\n` +
+              `I'd love to share my experience / feedback about your services. 💖`;
+            openWhatsApp(message);
+          }}
+          watermark="LOVE"
           zIndex={110}
         />
 
-        {/* Section 12: Contact (Flowing) */}
+        {/* Section 12: Know the Story (Flowing) */}
+        <StorySection image={getSectionImages('artist')[0]} />
+
+        {/* Section 13: Contact (Flowing) */}
         <ContactSection />
       </main>
 

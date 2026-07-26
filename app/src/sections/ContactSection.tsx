@@ -16,7 +16,9 @@ const ContactSection = () => {
     email: '',
     phone: '',
     service: '',
-    message: '',
+    datetime: '',
+    members: '',
+    location: '',
   });
 
   useLayoutEffect(() => {
@@ -29,11 +31,11 @@ const ContactSection = () => {
 
     const ctx = gsap.context(() => {
       // Contact block animation
-      gsap.fromTo(contactBlock, 
-        { y: 40, opacity: 0 }, 
-        { 
-          y: 0, 
-          opacity: 1, 
+      gsap.fromTo(contactBlock,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
           duration: 0.8,
           scrollTrigger: {
             trigger: contactBlock,
@@ -44,11 +46,11 @@ const ContactSection = () => {
       );
 
       // Form card animation
-      gsap.fromTo(formCard, 
-        { y: 60, opacity: 0, scale: 0.98 }, 
-        { 
-          y: 0, 
-          opacity: 1, 
+      gsap.fromTo(formCard,
+        { y: 60, opacity: 0, scale: 0.98 },
+        {
+          y: 0,
+          opacity: 1,
           scale: 1,
           duration: 0.8,
           delay: 0.2,
@@ -61,10 +63,10 @@ const ContactSection = () => {
       );
 
       // Footer animation
-      gsap.fromTo(footer, 
-        { opacity: 0 }, 
-        { 
-          opacity: 1, 
+      gsap.fromTo(footer,
+        { opacity: 0 },
+        {
+          opacity: 1,
           duration: 0.6,
           scrollTrigger: {
             trigger: footer,
@@ -81,11 +83,33 @@ const ContactSection = () => {
 
   const phoneNumber = '919548144908';
 
+  const serviceOptions = [
+    'Bridal Makeup',
+    'Groom Makeup',
+    'Pre-Bridal Service',
+    'Party Makeup',
+    'Engagement / Reception Makeup',
+    'Roka / Haldi / Mehndi Makeup',
+    'Cocktail / Sangeet Makeup',
+    'Academy Courses',
+    'Other',
+  ];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Hi Garvita! I'd like to enquire about your services.%0A%0AName: ${formData.name}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0AService: ${formData.service}%0AMessage: ${formData.message}`;
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-    setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+    const lines = [
+      `Hi Garvita! I'd like to enquire about your services. 💄`,
+      ``,
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Phone: ${formData.phone}`,
+      `Service: ${formData.service}`,
+      `Preferred Date & Time: ${formData.datetime}`,
+      `No. of Events / Members: ${formData.members}`,
+      `Location Preference: ${formData.location}`,
+    ];
+    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
+    setFormData({ name: '', email: '', phone: '', service: '', datetime: '', members: '', location: '' });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -93,6 +117,10 @@ const ContactSection = () => {
       ...prev,
       [e.target.name]: e.target.value
     }));
+  };
+
+  const scrollToForm = () => {
+    formCardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   return (
@@ -111,9 +139,17 @@ const ContactSection = () => {
             <h2 className="heading-lg font-serif text-ivory mb-6">
               Let's work<br />together.
             </h2>
-            <p className="text-text-muted-dark text-lg leading-relaxed mb-12">
-              Tell us what you're planning. We'll reply with availability, pricing, and next steps.
+            <p className="text-text-muted-dark text-lg leading-relaxed mb-4">
+              Thank you for considering us — we'd love to help you look and feel your absolute best on your special day.
             </p>
+            <p className="text-text-muted-dark text-lg leading-relaxed mb-8">
+              Click below to fill the form, and we'll reply with availability, pricing, and next steps.
+            </p>
+
+            <button onClick={scrollToForm} className="btn-primary mb-12">
+              Fill The Form
+              <MessageCircle className="w-4 h-4 ml-2" />
+            </button>
 
             {/* Contact Details */}
             <div className="space-y-6">
@@ -241,7 +277,7 @@ const ContactSection = () => {
 
                 <div>
                   <label htmlFor="phone" className="label-text text-charcoal/70 mb-2 block">
-                    Phone
+                    Phone Number
                   </label>
                   <input
                     type="tel"
@@ -249,6 +285,7 @@ const ContactSection = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
+                    required
                     className="w-full px-4 py-3 bg-transparent border-b-2 border-charcoal/20 focus:border-gold outline-none transition-colors text-charcoal"
                     placeholder="+91 95481 44908"
                   />
@@ -267,40 +304,74 @@ const ContactSection = () => {
                     className="w-full px-4 py-3 bg-transparent border-b-2 border-charcoal/20 focus:border-gold outline-none transition-colors text-charcoal appearance-none cursor-pointer"
                   >
                     <option value="">Select a service</option>
-                    <option value="bridal">Bridal Makeup</option>
-                    <option value="groom">Groom Makeup</option>
-                    <option value="pre-bridal">Pre-Bridal Makeup</option>
-                    <option value="cocktail">Cocktail Makeup</option>
-                    <option value="mehndi">Mehndi Makeup</option>
-                    <option value="roka">Roka Makeup</option>
-                    <option value="editorial">Editorial Makeup</option>
-                    <option value="academy">Academy Course</option>
-                    <option value="other">Other</option>
+                    {serviceOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="label-text text-charcoal/70 mb-2 block">
-                    Message
+                  <label htmlFor="datetime" className="label-text text-charcoal/70 mb-2 block">
+                    Preferred Date &amp; Time
                   </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
+                  <input
+                    type="text"
+                    id="datetime"
+                    name="datetime"
+                    value={formData.datetime}
                     onChange={handleChange}
-                    rows={4}
-                    className="w-full px-4 py-3 bg-transparent border-b-2 border-charcoal/20 focus:border-gold outline-none transition-colors text-charcoal resize-none"
-                    placeholder="Tell us about your event..."
+                    required
+                    className="w-full px-4 py-3 bg-transparent border-b-2 border-charcoal/20 focus:border-gold outline-none transition-colors text-charcoal"
+                    placeholder="e.g. 14 Nov 2026, 4:00 PM"
                   />
+                </div>
+
+                <div>
+                  <label htmlFor="members" className="label-text text-charcoal/70 mb-2 block">
+                    No. of Events / Members
+                  </label>
+                  <input
+                    type="text"
+                    id="members"
+                    name="members"
+                    value={formData.members}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-transparent border-b-2 border-charcoal/20 focus:border-gold outline-none transition-colors text-charcoal"
+                    placeholder="e.g. 2 events, 3 members"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="location" className="label-text text-charcoal/70 mb-2 block">
+                    Location Preference
+                  </label>
+                  <select
+                    id="location"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-transparent border-b-2 border-charcoal/20 focus:border-gold outline-none transition-colors text-charcoal appearance-none cursor-pointer"
+                  >
+                    <option value="">Select location preference</option>
+                    <option value="Studio">Studio</option>
+                    <option value="Venue">Venue</option>
+                  </select>
                 </div>
 
                 <button
                   type="submit"
                   className="w-full btn-primary mt-4"
                 >
-                  Send via WhatsApp
+                  Done
                   <MessageCircle className="w-4 h-4 ml-2" />
                 </button>
+                <p className="text-text-secondary text-xs text-center">
+                  Clicking Done will open WhatsApp with all your details filled in.
+                </p>
               </div>
             </form>
           </div>

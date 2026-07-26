@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
@@ -12,13 +12,19 @@ interface SplitSectionProps {
   imageAlt: string;
   headline: string[];
   headlineAccentIndex?: number;
-  body: string;
+  body?: string;
+  items?: string[];
   cta: string;
   ctaAction?: () => void;
   watermark: string;
   zIndex: number;
   secondaryCta?: string;
   secondaryAction?: () => void;
+  revealItems?: string[];
+  revealCta?: string;
+  revealCtaAction?: () => void;
+  feedbackTitle?: string;
+  feedbackNote?: string;
   hasProductCard?: boolean;
   productCardSrc?: string;
 }
@@ -30,12 +36,18 @@ const SplitSection = ({
   headline,
   headlineAccentIndex,
   body,
+  items,
   cta,
   ctaAction,
   watermark,
   zIndex,
   secondaryCta,
   secondaryAction,
+  revealItems,
+  revealCta,
+  revealCtaAction,
+  feedbackTitle,
+  feedbackNote,
   hasProductCard = false,
   productCardSrc,
 }: SplitSectionProps) => {
@@ -46,6 +58,8 @@ const SplitSection = ({
   const watermarkRef = useRef<HTMLDivElement>(null);
   const dividerRef = useRef<HTMLDivElement>(null);
   const productCardRef = useRef<HTMLDivElement>(null);
+
+  const [revealed, setRevealed] = useState(false);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -72,21 +86,21 @@ const SplitSection = ({
       // ENTRANCE (0-30%)
       scrollTl
         // Image enters from left
-        .fromTo(image, 
-          { x: '-60vw', opacity: 0 }, 
-          { x: 0, opacity: 1, ease: 'none' }, 
+        .fromTo(image,
+          { x: '-60vw', opacity: 0 },
+          { x: 0, opacity: 1, ease: 'none' },
           0
         )
         // Divider scales in
-        .fromTo(divider, 
-          { scaleY: 0 }, 
-          { scaleY: 1, transformOrigin: 'top' }, 
+        .fromTo(divider,
+          { scaleY: 0 },
+          { scaleY: 1, transformOrigin: 'top' },
           0
         )
         // Text block enters
-        .fromTo(textBlock, 
-          { x: '20vw', opacity: 0 }, 
-          { x: 0, opacity: 1, ease: 'none' }, 
+        .fromTo(textBlock,
+          { x: '20vw', opacity: 0 },
+          { x: 0, opacity: 1, ease: 'none' },
           0.05
         )
         // CTA block enters
@@ -96,17 +110,17 @@ const SplitSection = ({
           0.1
         )
         // Watermark scales in
-        .fromTo(watermarkEl, 
-          { scale: 0.92, opacity: 0 }, 
-          { scale: 1, opacity: 1, ease: 'none' }, 
+        .fromTo(watermarkEl,
+          { scale: 0.92, opacity: 0 },
+          { scale: 1, opacity: 1, ease: 'none' },
           0
         );
 
       // Product card entrance if present
       if (productCard) {
-        scrollTl.fromTo(productCard, 
-          { x: '40vw', opacity: 0, scale: 0.96 }, 
-          { x: 0, opacity: 1, scale: 1, ease: 'none' }, 
+        scrollTl.fromTo(productCard,
+          { x: '40vw', opacity: 0, scale: 0.96 },
+          { x: 0, opacity: 1, scale: 1, ease: 'none' },
           0.1
         );
       }
@@ -116,35 +130,35 @@ const SplitSection = ({
       // EXIT (70-100%)
       scrollTl
         // Image exits left
-        .fromTo(image, 
-          { x: 0, opacity: 1 }, 
-          { x: '-18vw', opacity: 0, ease: 'power2.in' }, 
+        .fromTo(image,
+          { x: 0, opacity: 1 },
+          { x: '-18vw', opacity: 0, ease: 'power2.in' },
           0.7
         )
         // Divider exits
-        .fromTo(divider, 
-          { scaleY: 1, opacity: 1 }, 
-          { scaleY: 0, opacity: 0, transformOrigin: 'bottom' }, 
+        .fromTo(divider,
+          { scaleY: 1, opacity: 1 },
+          { scaleY: 0, opacity: 0, transformOrigin: 'bottom' },
           0.7
         )
         // Text block exits right (but CTA stays)
-        .fromTo(textBlock, 
-          { x: 0, opacity: 1 }, 
-          { x: '10vw', opacity: 0, ease: 'power2.in' }, 
+        .fromTo(textBlock,
+          { x: 0, opacity: 1 },
+          { x: '10vw', opacity: 0, ease: 'power2.in' },
           0.7
         )
         // Watermark exits
-        .fromTo(watermarkEl, 
-          { x: 0, opacity: 1 }, 
-          { x: '8vw', opacity: 0, ease: 'power2.in' }, 
+        .fromTo(watermarkEl,
+          { x: 0, opacity: 1 },
+          { x: '8vw', opacity: 0, ease: 'power2.in' },
           0.7
         );
 
       // Product card exit if present
       if (productCard) {
-        scrollTl.fromTo(productCard, 
-          { y: 0, opacity: 1 }, 
-          { y: '18vh', opacity: 0, ease: 'power2.in' }, 
+        scrollTl.fromTo(productCard,
+          { y: 0, opacity: 1 },
+          { y: '18vh', opacity: 0, ease: 'power2.in' },
           0.7
         );
       }
@@ -153,6 +167,32 @@ const SplitSection = ({
 
     return () => ctx.revert();
   }, [hasProductCard]);
+
+  const isRevealMode = !!revealItems && revealItems.length > 0;
+  const primaryLabel = isRevealMode && revealed ? (revealCta ?? cta) : cta;
+
+  const handlePrimary = () => {
+    if (isRevealMode && !revealed) {
+      setRevealed(true);
+      return;
+    }
+    if (isRevealMode && revealed) {
+      revealCtaAction?.();
+      return;
+    }
+    ctaAction?.();
+  };
+
+  const renderList = (list: string[]) => (
+    <ul className="space-y-3 mb-10">
+      {list.map((item) => (
+        <li key={item} className="flex items-center gap-3">
+          <span className="w-1.5 h-1.5 rounded-full bg-gold shrink-0" />
+          <span className="text-charcoal/85 text-base leading-relaxed">{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <section
@@ -194,23 +234,42 @@ const SplitSection = ({
             </h2>
           </div>
 
-          {/* Body */}
-          <p className="body-text text-text-secondary mb-10">
-            {body}
-          </p>
+          {/* Body / Lists */}
+          {isRevealMode && revealed ? (
+            renderList(revealItems)
+          ) : (
+            <>
+              {body && (
+                <p className={`body-text text-text-secondary ${items ? 'mb-6' : 'mb-10'}`}>
+                  {body}
+                </p>
+              )}
+              {items && renderList(items)}
+            </>
+          )}
         </div>
 
         {/* CTA Row - Separate ref so it stays pinned */}
-        <div ref={ctaRef} className="flex flex-col sm:flex-row items-center gap-4 relative z-10">
-          <button onClick={ctaAction} className="btn-primary w-full sm:w-auto">
-            {cta}
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </button>
-          {secondaryCta && (
-            <button onClick={secondaryAction} className="btn-secondary w-full sm:w-auto bg-white/50 backdrop-blur-sm">
-              {secondaryCta}
+        <div ref={ctaRef} className="relative z-10">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <button onClick={handlePrimary} className="btn-primary w-full sm:w-auto">
+              {primaryLabel}
               <ArrowRight className="w-4 h-4 ml-2" />
             </button>
+            {secondaryCta && (
+              <button onClick={secondaryAction} className="btn-secondary w-full sm:w-auto bg-white/50 backdrop-blur-sm">
+                {secondaryCta}
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </button>
+            )}
+          </div>
+
+          {/* Feedback column (e.g. bride's feedback) */}
+          {feedbackTitle && (
+            <div className="mt-8 pt-6 border-t border-charcoal/10 max-w-[40ch]">
+              <p className="label-text text-gold mb-2">{feedbackTitle}</p>
+              <p className="text-text-secondary text-sm leading-relaxed">{feedbackNote}</p>
+            </div>
           )}
         </div>
       </div>

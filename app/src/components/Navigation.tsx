@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone, Instagram } from 'lucide-react';
+import { Menu, X, Phone, Instagram, ChevronDown } from 'lucide-react';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,10 +14,16 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const workOptions = [
+    { label: 'Bridal Makeup', href: '#bridal' },
+    { label: 'Non Bridal Makeups', href: '#packages' },
+    { label: 'Pre Bridal Services', href: '#selfcare' },
+    { label: 'Groom Makeup', href: '#contact' },
+  ];
+
   const navLinks = [
-    { label: 'Work', href: '#portfolio' },
     { label: 'Academy', href: '#academy' },
-    { label: 'Services', href: '#services' },
+    { label: 'Testimonials', href: '#testimonials' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -32,19 +38,17 @@ const Navigation = () => {
   return (
     <>
       {/* Top Contact Bar - Always visible */}
-      <div 
+      <div
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? 'opacity-0 -translate-y-full pointer-events-none' 
+          isScrolled
+            ? 'opacity-0 -translate-y-full pointer-events-none'
             : 'opacity-100 translate-y-0'
         }`}
       >
         <div className="bg-gold py-2 px-6 lg:px-12">
           <div className="flex items-center justify-between max-w-7xl mx-auto">
             <a
-              href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20came%20across%20your%20website%20and%20I%20have%20a%20general%20inquiry.%20Could%20you%20please%20assist%20me%3F"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="tel:+919548144908"
               className="flex items-center gap-2 text-white text-sm font-medium hover:text-ivory transition-colors"
             >
               <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center">
@@ -99,6 +103,27 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-10">
+            {/* Work dropdown */}
+            <div className="relative group">
+              <button className="label-text text-charcoal/80 hover:text-gold transition-colors duration-300 flex items-center gap-1.5">
+                Work
+                <ChevronDown className="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180" />
+              </button>
+              <div className="absolute left-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                <div className="bg-ivory border border-charcoal/10 shadow-card rounded-xl py-2 min-w-[230px]">
+                  {workOptions.map((option) => (
+                    <button
+                      key={option.label}
+                      onClick={() => scrollToSection(option.href)}
+                      className="w-full text-left px-5 py-2.5 text-sm text-charcoal/80 hover:text-gold hover:bg-gold/5 transition-colors"
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {navLinks.map((link) => (
               <button
                 key={link.label}
@@ -124,11 +149,9 @@ const Navigation = () => {
             </a>
 
             <a
-              href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20came%20across%20your%20website%20and%20I%20have%20a%20general%20inquiry.%20Could%20you%20please%20assist%20me%3F"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="tel:+919548144908"
               className="w-10 h-10 rounded-full border border-charcoal/20 flex items-center justify-center text-charcoal hover:text-gold hover:border-gold transition-all"
-              aria-label="Phone"
+              aria-label="Call Now"
             >
               <Phone className="w-4 h-4" />
             </a>
@@ -140,9 +163,9 @@ const Navigation = () => {
                   `I just visited your website and I'd love to book a makeup session! 💄\n\n` +
                   `Here's what I'm looking for:\n` +
                   `━━━━━━━━━━━━━━━━━━━━\n` +
-                  `📌 Service: [Bridal / Party / Editorial / Other]\n` +
+                  `📌 Service: [Bridal / Party / Pre-Bridal / Other]\n` +
                   `📅 Preferred date: [Please mention]\n` +
-                  `📍 Location: [Studio / Home / Venue]\n` +
+                  `📍 Location: [Studio / Venue]\n` +
                   `━━━━━━━━━━━━━━━━━━━━\n\n` +
                   `Could you please share your packages and availability? Thank you! 🌟`;
                 window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
@@ -170,21 +193,32 @@ const Navigation = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 z-30 bg-ivory transition-all duration-500 lg:hidden ${
+        className={`fixed inset-0 z-30 bg-ivory transition-all duration-500 lg:hidden overflow-y-auto ${
           isMobileMenuOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
         }`}
       >
-        <div className="flex flex-col items-center justify-center h-full gap-8 pt-20">
-          {navLinks.map((link, index) => (
+        <div className="flex flex-col items-center justify-start min-h-full gap-6 pt-28 pb-12">
+          {/* Work group */}
+          <div className="flex flex-col items-center gap-3">
+            <span className="font-serif text-3xl text-charcoal">Work</span>
+            {workOptions.map((option) => (
+              <button
+                key={option.label}
+                onClick={() => scrollToSection(option.href)}
+                className="text-base text-charcoal/70 hover:text-gold transition-colors"
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+
+          {navLinks.map((link) => (
             <button
               key={link.label}
               onClick={() => scrollToSection(link.href)}
               className="font-serif text-3xl text-charcoal hover:text-gold transition-colors"
-              style={{
-                animationDelay: `${index * 100}ms`,
-              }}
             >
               {link.label}
             </button>
@@ -196,9 +230,9 @@ const Navigation = () => {
                 `I just visited your website and I'd love to book a makeup session! 💄\n\n` +
                 `Here's what I'm looking for:\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
-                `📌 Service: [Bridal / Party / Editorial / Other]\n` +
+                `📌 Service: [Bridal / Party / Pre-Bridal / Other]\n` +
                 `📅 Preferred date: [Please mention]\n` +
-                `📍 Location: [Studio / Home / Venue]\n` +
+                `📍 Location: [Studio / Venue]\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n\n` +
                 `Could you please share your packages and availability? Thank you! 🌟`;
               window.open(`https://wa.me/919548144908?text=${encodeURIComponent(message)}`, '_blank');
@@ -207,13 +241,11 @@ const Navigation = () => {
           >
             Book a Session
           </button>
-          
+
           {/* Mobile Contact Info */}
           <div className="flex flex-col items-center gap-4 mt-8 pt-8 border-t border-charcoal/10">
             <a
-              href="https://wa.me/919548144908?text=Hi%20Garvita!%20I%20came%20across%20your%20website%20and%20I%20have%20a%20general%20inquiry.%20Could%20you%20please%20assist%20me%3F"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="tel:+919548144908"
               className="flex items-center gap-3 text-charcoal hover:text-gold transition-colors"
             >
               <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center">
