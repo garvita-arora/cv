@@ -227,7 +227,7 @@ function App() {
           cta="Book a session"
           ctaAction={() => openEnquiry('bridal')}
           feedbackTitle="Bride's Feedback"
-          feedbackNote="Real stories from our brides are on their way — watch this space."
+          feedbackNote={`"It was exactly what I had dreamed of, and I still can't believe it stayed flawless even after hours." — Stuti J.`}
           watermark="BRIDE"
           zIndex={60}
         />

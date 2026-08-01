@@ -1,35 +1,42 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, useEffect, useState, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Quote, MessageCircle } from 'lucide-react';
 import { openWhatsApp, WA_MESSAGES } from '../lib/whatsapp';
+import { testimonials, type TestimonialCategory } from '../data/testimonials';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Testimonial {
-  quote: string;
-  name: string;
-  service: string;
-}
+const FILTERS: Array<'All' | TestimonialCategory> = ['All', 'Bridal', 'Party & Events', 'Academy'];
 
-// Real client stories go here once Garvita shares them — each entry renders
-// as a card automatically. Until then the section shows a graceful
-// "coming soon" state instead of fabricated quotes.
-const testimonials: Testimonial[] = [];
+const STATS = [
+  { value: '2200+', label: 'Brides' },
+  { value: '8', label: 'Years of artistry' },
+  { value: '100+', label: 'Artists mentored' },
+];
 
-const categories = ['Bridal', 'Party Makeup', 'Pre-Bridal', 'Academy'];
+const INITIAL_COUNT = 6;
 
 const TestimonialsSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const [filter, setFilter] = useState<'All' | TestimonialCategory>('All');
+  const [showAll, setShowAll] = useState(false);
+
+  const filtered = useMemo(
+    () => (filter === 'All' ? testimonials : testimonials.filter(t => t.category === filter)),
+    [filter]
+  );
+
+  const visible = showAll ? filtered : filtered.slice(0, INITIAL_COUNT);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
-    const content = contentRef.current;
-    if (!section || !content) return;
+    const header = headerRef.current;
+    if (!section || !header) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(content,
+      gsap.fromTo(header,
         { y: 40, opacity: 0 },
         {
           y: 0,
@@ -37,7 +44,7 @@ const TestimonialsSection = () => {
           duration: 0.8,
           ease: 'power2.out',
           scrollTrigger: {
-            trigger: content,
+            trigger: header,
             start: 'top 80%',
             toggleActions: 'play none none reverse',
           }
@@ -48,85 +55,114 @@ const TestimonialsSection = () => {
     return () => ctx.revert();
   }, []);
 
-  const handleShareExperience = () => openWhatsApp(WA_MESSAGES.feedback);
+  // Filtering / expanding changes the page height, so pinned-section positions
+  // and the scroll snap need to be recalculated.
+  useEffect(() => {
+    const id = window.setTimeout(() => ScrollTrigger.refresh(), 120);
+    return () => window.clearTimeout(id);
+  }, [filter, showAll]);
+
+  const selectFilter = (next: 'All' | TestimonialCategory) => {
+    setFilter(next);
+    setShowAll(false);
+  };
 
   return (
     <section
       ref={sectionRef}
       id="testimonials"
-      className="relative bg-ivory py-20 lg:py-32 overflow-hidden"
+      className="relative bg-ivory py-20 lg:py-28 overflow-hidden"
     >
       {/* Background watermark */}
-      <div className="absolute -right-10 top-1/2 -translate-y-1/2 watermark select-none pointer-events-none hidden lg:block">
+      <div className="absolute -right-10 top-24 watermark select-none pointer-events-none hidden lg:block">
         LOVE
       </div>
 
-      <div ref={contentRef} className="relative max-w-6xl mx-auto px-6 lg:px-12">
+      <div className="relative max-w-6xl mx-auto px-6 lg:px-12">
         {/* Heading */}
-        <div className="text-center mb-12 lg:mb-16">
+        <div ref={headerRef} className="text-center mb-10 lg:mb-12">
           <p className="label-text text-gold mb-4">Testimonials</p>
-          <h2 className="heading-lg font-serif text-charcoal mb-6">
-            Kind words.
-          </h2>
-          <p className="body-text text-text-secondary mx-auto">
-            What our brides, students, and clients say about their time with us.
+          <h2 className="heading-lg font-serif text-charcoal mb-5">Kind words.</h2>
+          <p className="body-text text-text-secondary mx-auto text-sm lg:text-base">
+            Real messages from our brides, clients, and academy students.
           </p>
-        </div>
 
-        {testimonials.length === 0 ? (
-          /* Coming-soon state — swapped out automatically once quotes exist */
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="bg-white rounded-2xl shadow-subtle border border-charcoal/5 px-8 py-12 lg:px-14">
-              <div className="w-14 h-14 mx-auto rounded-full bg-gold/10 flex items-center justify-center mb-6">
-                <Quote className="w-6 h-6 text-gold" />
-              </div>
-              <p className="font-serif text-2xl lg:text-3xl text-charcoal leading-snug mb-4">
-                Real stories are on their way.
-              </p>
-              <p className="text-text-secondary text-base leading-relaxed mb-8">
-                We're gathering experiences from our brides, party-makeup clients,
-                pre-bridal guests, and academy students — this space will soon be
-                filled with their words.
-              </p>
-
-              {/* Category chips */}
-              <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
-                {categories.map((category) => (
-                  <span
-                    key={category}
-                    className="px-4 py-1.5 rounded-full border border-gold/40 text-gold text-xs uppercase tracking-wider"
-                  >
-                    {category}
-                  </span>
-                ))}
-              </div>
-
-              <button onClick={handleShareExperience} className="btn-primary">
-                Share your experience
-                <MessageCircle className="w-4 h-4 ml-2" />
-              </button>
-            </div>
-          </div>
-        ) : (
-          /* Card grid once real testimonials are added */
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl shadow-subtle border border-charcoal/5 p-8 flex flex-col"
-              >
-                <Quote className="w-8 h-8 text-gold/40 mb-5" />
-                <p className="text-charcoal/85 text-base leading-relaxed flex-1 mb-6">
-                  {testimonial.quote}
+          {/* Stats */}
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 mt-10 pt-8 border-t border-charcoal/10 max-w-2xl mx-auto">
+            {STATS.map(stat => (
+              <div key={stat.label} className="text-center">
+                <p className="font-serif text-3xl lg:text-4xl text-gold leading-none mb-1.5">
+                  {stat.value}
                 </p>
-                <div className="pt-5 border-t border-charcoal/10">
-                  <p className="font-serif text-lg text-charcoal">{testimonial.name}</p>
-                  <p className="label-text text-gold mt-1">{testimonial.service}</p>
-                </div>
+                <p className="label-text text-charcoal/60">{stat.label}</p>
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Category filters */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-10">
+          {FILTERS.map(option => {
+            const active = filter === option;
+            return (
+              <button
+                key={option}
+                onClick={() => selectFilter(option)}
+                className={`px-5 py-2 rounded-full text-sm font-medium border transition-all ${
+                  active
+                    ? 'bg-gold border-gold text-white shadow-md'
+                    : 'border-charcoal/20 text-charcoal/75 hover:border-gold hover:text-gold'
+                }`}
+              >
+                {option}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Testimonial cards (masonry via CSS columns) */}
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-5 lg:gap-6">
+          {visible.map((testimonial, index) => (
+            <figure
+              key={`${testimonial.name}-${index}`}
+              className="break-inside-avoid mb-5 lg:mb-6 bg-white rounded-2xl shadow-subtle border border-charcoal/5 p-6 lg:p-7"
+            >
+              <Quote className="w-7 h-7 text-gold/35 mb-4" />
+              <blockquote className="text-charcoal/85 text-[15px] leading-relaxed mb-5">
+                {testimonial.quote}
+              </blockquote>
+              <figcaption className="pt-4 border-t border-charcoal/10">
+                <p className="font-serif text-lg text-charcoal leading-tight">{testimonial.name}</p>
+                <p className="label-text text-gold mt-1.5">{testimonial.service}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        {/* Show more / less */}
+        {filtered.length > INITIAL_COUNT && (
+          <div className="text-center mt-4">
+            <button onClick={() => setShowAll(prev => !prev)} className="btn-secondary">
+              {showAll
+                ? 'Show fewer'
+                : `Read all ${filtered.length} reviews`}
+            </button>
+          </div>
         )}
+
+        {/* Share CTA */}
+        <div className="text-center mt-14 pt-10 border-t border-charcoal/10">
+          <p className="font-serif text-2xl lg:text-3xl text-charcoal mb-3">
+            Been in our chair?
+          </p>
+          <p className="text-text-secondary text-sm mb-7 max-w-md mx-auto leading-relaxed">
+            We would love to hear how your day went.
+          </p>
+          <button onClick={() => openWhatsApp(WA_MESSAGES.feedback)} className="btn-primary">
+            Share your experience
+            <MessageCircle className="w-4 h-4 ml-2" />
+          </button>
+        </div>
       </div>
     </section>
   );
