@@ -12,6 +12,9 @@ interface FullBleedSectionProps {
   headline: string;
   microcopy: string;
   zIndex: number;
+  /** When set, the giant headline becomes a button (e.g. ARTIST -> the story) */
+  headlineAction?: () => void;
+  headlineHint?: string;
 }
 
 const FullBleedSection = ({
@@ -21,6 +24,8 @@ const FullBleedSection = ({
   headline,
   microcopy,
   zIndex,
+  headlineAction,
+  headlineHint,
 }: FullBleedSectionProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
@@ -168,7 +173,7 @@ const FullBleedSection = ({
         <span className="label-text text-ivory/80">Garvita Arora</span>
       </div>
 
-      {/* Center Headline */}
+      {/* Center Headline (a button when headlineAction is provided) */}
       <h2
         ref={headlineRef}
         className="absolute left-1/2 top-[52%] -translate-x-1/2 -translate-y-1/2 font-serif text-ivory text-center w-full px-4"
@@ -179,7 +184,24 @@ const FullBleedSection = ({
           letterSpacing: '-0.02em',
         }}
       >
-        {headline}
+        {headlineAction ? (
+          <button
+            onClick={headlineAction}
+            className="group relative inline-block font-serif text-ivory hover:text-gold transition-colors duration-500 cursor-pointer"
+            style={{ fontSize: 'inherit', lineHeight: 'inherit', letterSpacing: 'inherit' }}
+          >
+            {headline}
+            {/* Underline grows on hover */}
+            <span className="absolute left-1/2 -translate-x-1/2 bottom-0 h-px w-0 bg-gold transition-all duration-500 group-hover:w-full" />
+            {headlineHint && (
+              <span className="block label-text text-ivory/70 group-hover:text-gold mt-4 transition-colors duration-500 text-[11px] sm:text-xs tracking-[0.18em]">
+                {headlineHint}
+              </span>
+            )}
+          </button>
+        ) : (
+          headline
+        )}
       </h2>
 
       {/* Bottom-left Microcopy */}

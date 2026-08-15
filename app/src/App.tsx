@@ -195,6 +195,9 @@ function App() {
             'Hairstyling course',
             'Nail extension course',
             'Hydra Facial course',
+            'Beauty therapist / beautician course',
+            'Cosmetologist course',
+            'Beauty business course',
           ]}
           revealCta="Join now"
           revealCtaAction={() => openEnquiry('academyJoin')}
@@ -243,6 +246,7 @@ function App() {
             'Engagement / Reception makeup',
             'Roka / Haldi / Mehendi makeup',
             'Cocktail / Sangeet makeup',
+            'Groom makeup',
           ]}
           cta="Book a session"
           ctaAction={() => openEnquiry('packages')}
@@ -266,6 +270,8 @@ function App() {
           images={getSectionImages('artist')}
           imageAlt="The artist"
           headline="ARTIST"
+          headlineAction={() => scrollToSection('#story')}
+          headlineHint="Tap to know the artist"
           microcopy="Years of bridal, non-bridal, and skin & hair treatment expertise—distilled into a method that's reliable and personal."
           zIndex={90}
         />

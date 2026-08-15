@@ -206,12 +206,19 @@ const SplitSection = ({
     ctaAction?.();
   };
 
+  // Long lists need a tighter mobile layout (shorter image strip, denser list)
+  // or the content overflows the fixed-height section on small phones.
+  const longestList = Math.max(items?.length ?? 0, revealItems?.length ?? 0);
+  const compact = longestList > 4;
+
   const renderList = (list: string[]) => (
-    <ul className="space-y-2 lg:space-y-3 mb-6 lg:mb-10">
+    <ul className={`${compact ? 'space-y-1.5' : 'space-y-2'} lg:space-y-3 mb-5 lg:mb-10`}>
       {list.map((item) => (
         <li key={item} className="flex items-center gap-3">
           <span className="w-1.5 h-1.5 rounded-full bg-gold shrink-0" />
-          <span className="text-charcoal/85 text-sm lg:text-base leading-relaxed">{item}</span>
+          <span className={`text-charcoal/85 ${compact ? 'text-[13px]' : 'text-sm'} lg:text-base leading-snug lg:leading-relaxed`}>
+            {item}
+          </span>
         </li>
       ))}
     </ul>
@@ -227,7 +234,7 @@ const SplitSection = ({
       {/* Portrait Image: top strip on mobile, left column on desktop */}
       <div
         ref={imageRef}
-        className="absolute left-0 top-0 w-full h-[38svh] lg:w-[56vw] lg:h-full overflow-hidden"
+        className={`absolute left-0 top-0 w-full ${compact ? 'h-[27svh]' : 'h-[38svh]'} lg:w-[56vw] lg:h-full overflow-hidden`}
       >
         <RotatingImage images={images} alt={imageAlt} />
       </div>
@@ -239,10 +246,10 @@ const SplitSection = ({
       />
 
       {/* Text Block: below image on mobile, right column on desktop */}
-      <div className="absolute left-0 right-0 top-[42svh] px-6 lg:left-[62vw] lg:right-auto lg:top-[18vh] lg:px-0 lg:w-[34vw]">
+      <div className={`absolute left-0 right-0 ${compact ? 'top-[31svh]' : 'top-[42svh]'} px-6 lg:left-[62vw] lg:right-auto lg:top-[18vh] lg:px-0 lg:w-[34vw]`}>
         <div ref={textBlockRef}>
           {/* Headline */}
-          <div className="mb-4 lg:mb-8">
+          <div className={`${compact ? 'mb-3' : 'mb-4'} lg:mb-8`}>
             <h2 className="heading-lg font-serif text-charcoal">
               {headline.map((line, index) => (
                 <span

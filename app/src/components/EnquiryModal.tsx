@@ -30,6 +30,7 @@ const PACKAGE_OPTIONS = [
   'Engagement / Reception Makeup',
   'Roka / Haldi / Mehndi Makeup',
   'Cocktail / Sangeet Makeup',
+  'Groom Makeup',
 ];
 
 const COURSE_OPTIONS = [
@@ -38,6 +39,9 @@ const COURSE_OPTIONS = [
   'Hairstyling Course',
   'Nail Extension Course',
   'Hydra Facial Course',
+  'Beauty Therapist / Beautician Course',
+  'Cosmetologist Course',
+  'Beauty Business Course',
 ];
 
 const BATCH_OPTIONS = ['Weekday batch', 'Weekend batch', 'Flexible'];
