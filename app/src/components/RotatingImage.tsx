@@ -5,11 +5,15 @@ const RotatingImage = ({
   alt,
   className = "",
   eager = false,
+  positionClass = "object-[50%_30%] lg:object-center",
 }: {
   images: string[];
   alt: string;
   className?: string;
   eager?: boolean;
+  /** Tailwind object-position classes. Override for portrait sources that
+   *  would otherwise be cropped through the subject's face. */
+  positionClass?: string;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [inView, setInView] = useState(eager);
@@ -61,7 +65,7 @@ const RotatingImage = ({
           src={inView ? src : undefined}
           alt={`${alt} ${index + 1}`}
           decoding="async"
-          className={`absolute inset-0 w-full h-full object-cover object-[50%_30%] lg:object-center transition-opacity duration-1000 ease-in-out ${
+          className={`absolute inset-0 w-full h-full object-cover ${positionClass} transition-opacity duration-1000 ease-in-out ${
             index === currentIndex ? 'opacity-100' : 'opacity-0'
           } ${className}`}
         />

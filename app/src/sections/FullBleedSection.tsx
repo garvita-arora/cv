@@ -15,6 +15,8 @@ interface FullBleedSectionProps {
   /** When set, the giant headline becomes a button (e.g. ARTIST -> the story) */
   headlineAction?: () => void;
   headlineHint?: string;
+  /** Object-position override for portrait images in this landscape section */
+  imagePosition?: string;
 }
 
 const FullBleedSection = ({
@@ -26,6 +28,7 @@ const FullBleedSection = ({
   zIndex,
   headlineAction,
   headlineHint,
+  imagePosition,
 }: FullBleedSectionProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
@@ -160,7 +163,11 @@ const FullBleedSection = ({
         ref={bgRef}
         className="absolute inset-0 w-full h-full overflow-hidden"
       >
-        <RotatingImage images={images} alt={imageAlt} />
+        <RotatingImage
+          images={images}
+          alt={imageAlt}
+          {...(imagePosition ? { positionClass: imagePosition } : {})}
+        />
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/30" />
       </div>

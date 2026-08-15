@@ -270,6 +270,7 @@ function App() {
           id="artist"
           images={getSectionImages('artist')}
           imageAlt="The artist"
+          imagePosition="object-[50%_28%] lg:object-[50%_34%]"
           headline="ARTIST"
           headlineAction={() => scrollToSection('#story')}
           headlineHint="Tap to know the artist"
