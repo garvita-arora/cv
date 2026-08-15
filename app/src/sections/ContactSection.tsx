@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, Phone, MapPin, Instagram, MessageCircle } from 'lucide-react';
 import { smoothScrollTo } from '../lib/scroll';
 import { openWhatsApp, waLink, WA_MESSAGES } from '../lib/whatsapp';
+import { openTerms } from '../components/TermsModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -392,9 +393,12 @@ const ContactSection = () => {
             <a href="#" className="text-ivory/60 hover:text-gold text-sm transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-ivory/60 hover:text-gold text-sm transition-colors">
-              Terms of Service
-            </a>
+            <button
+              onClick={openTerms}
+              className="text-ivory/60 hover:text-gold text-sm transition-colors"
+            >
+              Terms &amp; Conditions
+            </button>
           </div>
         </div>
       </footer>

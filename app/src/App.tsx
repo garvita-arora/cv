@@ -15,6 +15,7 @@ import ContactSection from './sections/ContactSection';
 import { smoothScrollTo } from './lib/scroll';
 import { openEnquiry } from './lib/whatsapp';
 import EnquiryModal from './components/EnquiryModal';
+import TermsModal from './components/TermsModal';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -301,8 +302,9 @@ function App() {
       {/* Floating Social Buttons */}
       <FloatingSocial />
 
-      {/* Guided enquiry dialog (fixed — must stay outside the smooth wrapper) */}
+      {/* Fixed overlays — must stay outside the smooth wrapper */}
       <EnquiryModal />
+      <TermsModal />
     </div>
   );
 }
